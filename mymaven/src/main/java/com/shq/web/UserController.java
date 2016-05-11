@@ -1,4 +1,4 @@
-package com.shq.controller;
+package com.shq.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
