@@ -7,15 +7,25 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.cai.dao.PT_DataFieldMapper;
 import com.cai.pojo.PT_DataField;
 import com.cai.service.DataFieldService;
 
-
+@Service
 public class DataFieldServiceImpl implements DataFieldService {
 	@Resource
 	private PT_DataFieldMapper dataFieldDao;
 
+
+	/**
+     * 按主键删除数据
+     * @param datafieldbo
+     * @return
+	 * @throws Exception 
+     * 
+     */
 	public int deleteByPrimaryKey(String datafieldbo) throws Exception{
 		// TODO Auto-generated method stub
 		if(datafieldbo == null)
@@ -28,14 +38,44 @@ public class DataFieldServiceImpl implements DataFieldService {
 		return Result;
 	}
 
+
+	/**
+     * 插入数据不允许存在空值
+     * @param ptDataFieldBean
+     * @return
+	 * @throws Exception 
+     * 
+     */
 	public int insert(PT_DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		if(ptDataFieldBean == null)
+		{
+			throw new Exception("datafieldbo is null");
+		}
+		
+		int  Result = this.dataFieldDao.insert(ptDataFieldBean);
+		
+		return Result;
 	}
 
+	
+	/**
+     * 插入数据允许存在空值
+     * @param ptDataFieldBean
+     * @return
+	 * @throws Exception 
+     * 
+     */
 	public int insertSelective(PT_DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		if(ptDataFieldBean == null)
+		{
+			throw new Exception("datafieldbo is null");
+		}
+		
+		int  Result = this.dataFieldDao.insert(ptDataFieldBean);
+		
+		return Result;
 	}
 
 	/**
@@ -49,7 +89,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	  public PT_DataField selectByPrimaryKey(String datafieldbo) throws Exception {
 		// TODO Auto-generated method stub
 		//入参为空
-		if(datafieldbo == null)
+		if(datafieldbo.equals(null) || datafieldbo.equals(""))
 		{
 			throw new Exception("datafieldbo is null");
 		}
@@ -64,12 +104,24 @@ public class DataFieldServiceImpl implements DataFieldService {
 
 	public int updateByPrimaryKeySelective(PT_DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		if(ptDataFieldBean == null)
+		{
+			throw new Exception("ptDataFieldBean is null");
+		}
+		int Result =this.dataFieldDao.updateByPrimaryKeySelective(ptDataFieldBean);
+		
+		return Result;
 	}
 
 	public int updateByPrimaryKey(PT_DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		if(ptDataFieldBean == null)
+		{
+			throw new Exception("ptDataFieldBean is null");
+		}
+		int result = this.dataFieldDao.updateByPrimaryKey(ptDataFieldBean);
+		return result;
 	}
 
 }
