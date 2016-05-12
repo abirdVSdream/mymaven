@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cai.dao.pt_datafieldMapper" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.pt_datafield" >
+    <id column="datafieldBo" property="datafieldbo" jdbcType="VARCHAR" />
+    <result column="datafield" property="datafield" jdbcType="VARCHAR" />
+    <result column="dataTag" property="datatag" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="fieldType" property="fieldtype" jdbcType="VARCHAR" />
+    <result column="maskgroupBo" property="maskgroupbo" jdbcType="VARCHAR" />
+    <result column="fieldUnit" property="fieldunit" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    datafieldBo, datafield, dataTag, description, fieldType, maskgroupBo, fieldUnit
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cai.pojo.pt_datafieldExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from datafield
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from datafield
+    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from datafield
+    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cai.pojo.pt_datafieldExample" >
+    delete from datafield
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cai.pojo.pt_datafield" >
+    insert into datafield (datafieldBo, datafield, dataTag, 
+      description, fieldType, maskgroupBo, 
+      fieldUnit)
+    values (#{datafieldbo,jdbcType=VARCHAR}, #{datafield,jdbcType=VARCHAR}, #{datatag,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{fieldtype,jdbcType=VARCHAR}, #{maskgroupbo,jdbcType=VARCHAR}, 
+      #{fieldunit,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cai.pojo.pt_datafield" >
+    insert into datafield
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="datafieldbo != null" >
+        datafieldBo,
+      </if>
+      <if test="datafield != null" >
+        datafield,
+      </if>
+      <if test="datatag != null" >
+        dataTag,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="fieldtype != null" >
+        fieldType,
+      </if>
+      <if test="maskgroupbo != null" >
+        maskgroupBo,
+      </if>
+      <if test="fieldunit != null" >
+        fieldUnit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="datafieldbo != null" >
+        #{datafieldbo,jdbcType=VARCHAR},
+      </if>
+      <if test="datafield != null" >
+        #{datafield,jdbcType=VARCHAR},
+      </if>
+      <if test="datatag != null" >
+        #{datatag,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtype != null" >
+        #{fieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="maskgroupbo != null" >
+        #{maskgroupbo,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldunit != null" >
+        #{fieldunit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cai.pojo.pt_datafieldExample" resultType="java.lang.Integer" >
+    select count(*) from datafield
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update datafield
+    <set >
+      <if test="record.datafieldbo != null" >
+        datafieldBo = #{record.datafieldbo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datafield != null" >
+        datafield = #{record.datafield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datatag != null" >
+        dataTag = #{record.datatag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldtype != null" >
+        fieldType = #{record.fieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maskgroupbo != null" >
+        maskgroupBo = #{record.maskgroupbo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldunit != null" >
+        fieldUnit = #{record.fieldunit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update datafield
+    set datafieldBo = #{record.datafieldbo,jdbcType=VARCHAR},
+      datafield = #{record.datafield,jdbcType=VARCHAR},
+      dataTag = #{record.datatag,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      fieldType = #{record.fieldtype,jdbcType=VARCHAR},
+      maskgroupBo = #{record.maskgroupbo,jdbcType=VARCHAR},
+      fieldUnit = #{record.fieldunit,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.pt_datafield" >
+    update datafield
+    <set >
+      <if test="datafield != null" >
+        datafield = #{datafield,jdbcType=VARCHAR},
+      </if>
+      <if test="datatag != null" >
+        dataTag = #{datatag,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtype != null" >
+        fieldType = #{fieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="maskgroupbo != null" >
+        maskgroupBo = #{maskgroupbo,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldunit != null" >
+        fieldUnit = #{fieldunit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.pt_datafield" >
+    update datafield
+    set datafield = #{datafield,jdbcType=VARCHAR},
+      dataTag = #{datatag,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      fieldType = #{fieldtype,jdbcType=VARCHAR},
+      maskgroupBo = #{maskgroupbo,jdbcType=VARCHAR},
+      fieldUnit = #{fieldunit,jdbcType=VARCHAR}
+    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+  </update>
+</mapper>
