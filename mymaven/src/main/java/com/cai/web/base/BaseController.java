@@ -15,13 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 //import com.google.gson.Gson;
-import com.imes.domain.admin.CmUserBean;
-import com.imes.domain.config.CmStatusBean;
-import com.imes.domain.config.PtRunStatusBean;
-import com.imes.frame.exception.ImesBussinessException;
-import com.imes.frame.service.BaseServiceI;
-import com.imes.frame.util.BeanMapUtil;
-import com.imes.frame.util.UserInf;
 
 public abstract class BaseController
 {
@@ -47,7 +40,7 @@ public abstract class BaseController
         super();
     }
     
-    public abstract BaseServiceI getService();
+//    public abstract BaseServiceI getService();
     
     /**
      * 跳转页面
@@ -211,95 +204,95 @@ public abstract class BaseController
         }
     }
     
-    public CmStatusBean getStatusBo(HttpServletRequest request, String status, String statusGroup)
-    {
-        CmStatusBean cmStatusBo = new CmStatusBean();
-        if (!StringUtils.isEmpty(status))
-        {
-            cmStatusBo.setCompany(this.getCompany(request));
-            cmStatusBo.setStatus(status);
-            cmStatusBo.setStatusGroup(statusGroup);
-        }
-        return cmStatusBo;
-    }
+//    public CmStatusBean getStatusBo(HttpServletRequest request, String status, String statusGroup)
+//    {
+//        CmStatusBean cmStatusBo = new CmStatusBean();
+//        if (!StringUtils.isEmpty(status))
+//        {
+//            cmStatusBo.setCompany(this.getCompany(request));
+//            cmStatusBo.setStatus(status);
+//            cmStatusBo.setStatusGroup(statusGroup);
+//        }
+//        return cmStatusBo;
+//    }
+//    
+//    public PtRunStatusBean getRunStatusBo(HttpServletRequest request, String runStatus, String statusGroup)
+//    {
+//        PtRunStatusBean runStatusBo = new PtRunStatusBean();
+//        runStatusBo.setCompany(this.getCompany(request));
+//        runStatusBo.setRunStatus(runStatus);
+//        ;
+//        runStatusBo.setStatusGroup(statusGroup);
+//        runStatusBo.setPlant(this.getPlant(request));
+//        return runStatusBo;
+//    }
     
-    public PtRunStatusBean getRunStatusBo(HttpServletRequest request, String runStatus, String statusGroup)
-    {
-        PtRunStatusBean runStatusBo = new PtRunStatusBean();
-        runStatusBo.setCompany(this.getCompany(request));
-        runStatusBo.setRunStatus(runStatus);
-        ;
-        runStatusBo.setStatusGroup(statusGroup);
-        runStatusBo.setPlant(this.getPlant(request));
-        return runStatusBo;
-    }
+//    public CmUserBean getUserBo(HttpServletRequest request)
+//    {
+//        CmUserBean cmUserBo = new CmUserBean();
+//        UserInf userInf = new UserInf();
+//        cmUserBo.setCompany(userInf.getCompany());
+//        cmUserBo.setUserid(userInf.getUser());
+//        
+//        return cmUserBo;
+//    }
+//    
+//    public Object toBean(String jsonObj, Class<?> type)
+//    {
+////        Gson g = new Gson();
+//        JSONObject JsonO = JSONObject.fromObject(jsonObj);
+//        Map mp = (Map)JSONObject.toBean(JsonO,  Map.class);
+//        try {
+//			return this.toBean(mp, type);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+////     	  Object obj =JSONObject.toBean(JsonO, type);
+////        Object obj = g.fromJson(jsonObj, type);
+//        return null;
+//    }
     
-    public CmUserBean getUserBo(HttpServletRequest request)
-    {
-        CmUserBean cmUserBo = new CmUserBean();
-        UserInf userInf = new UserInf();
-        cmUserBo.setCompany(userInf.getCompany());
-        cmUserBo.setUserid(userInf.getUser());
-        
-        return cmUserBo;
-    }
+//    public Object toBean(Map<String, ? extends Object> map, Class<?> type)
+//        throws Exception
+//    {
+//        
+//        return BeanMapUtil.toBean(type, map);
+//    }
     
-    public Object toBean(String jsonObj, Class<?> type)
-    {
-//        Gson g = new Gson();
-        JSONObject JsonO = JSONObject.fromObject(jsonObj);
-        Map mp = (Map)JSONObject.toBean(JsonO,  Map.class);
-        try {
-			return this.toBean(mp, type);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-//     	  Object obj =JSONObject.toBean(JsonO, type);
-//        Object obj = g.fromJson(jsonObj, type);
-        return null;
-    }
-    
-    public Object toBean(Map<String, ? extends Object> map, Class<?> type)
-        throws Exception
-    {
-        
-        return BeanMapUtil.toBean(type, map);
-    }
-    
-    public String getCompany(HttpServletRequest request)
-    {
-        UserInf useri = new UserInf();
-        return useri.getCompany();
-    }
-    
-    public String getPlant(HttpServletRequest request)
-    {
-        UserInf useri = new UserInf();
-        String plant=useri.getPlant(request);
-        if(plant.equals("*"))
-        {
-        	CmUserBean cmUserBo=new CmUserBean();
-        	cmUserBo.setCompany(useri.getCompany());
-        	cmUserBo.setUserid(useri.getUser());
-        	try {
-				Map<String,Object> userMap=this.getService().retrieve(cmUserBo);
-				String defaultPlant=(String)userMap.get("DEFAULT_PLANT");
-				if(!StringUtils.isEmpty(defaultPlant))
-				{
-					useri.setPlant(request, defaultPlant);
-					plant=useri.getPlant(request);
-				}
-			} catch (ImesBussinessException e) {
-				e.printStackTrace();
-			}
-        }
-        return plant;
-    }
-    
-    public String getUser(HttpServletRequest request)
-    {
-        UserInf useri = new UserInf();
-        return useri.getUser();
-    }
-    
+//    public String getCompany(HttpServletRequest request)
+//    {
+//        UserInf useri = new UserInf();
+//        return useri.getCompany();
+//    }
+//    
+//    public String getPlant(HttpServletRequest request)
+//    {
+//        UserInf useri = new UserInf();
+//        String plant=useri.getPlant(request);
+//        if(plant.equals("*"))
+//        {
+//        	CmUserBean cmUserBo=new CmUserBean();
+//        	cmUserBo.setCompany(useri.getCompany());
+//        	cmUserBo.setUserid(useri.getUser());
+//        	try {
+//				Map<String,Object> userMap=this.getService().retrieve(cmUserBo);
+//				String defaultPlant=(String)userMap.get("DEFAULT_PLANT");
+//				if(!StringUtils.isEmpty(defaultPlant))
+//				{
+//					useri.setPlant(request, defaultPlant);
+//					plant=useri.getPlant(request);
+//				}
+//			} catch (ImesBussinessException e) {
+//				e.printStackTrace();
+//			}
+//        }
+//        return plant;
+//    }
+//    
+//    public String getUser(HttpServletRequest request)
+//    {
+//        UserInf useri = new UserInf();
+//        return useri.getUser();
+//    }
+//    
 }

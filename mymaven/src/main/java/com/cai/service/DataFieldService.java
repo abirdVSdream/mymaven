@@ -14,8 +14,11 @@ public interface DataFieldService
 	public int insert(PT_DataField ptDataFieldBean) throws Exception;
 
 	public int insertSelective(PT_DataField ptDataFieldBean) throws Exception;
-
-	public PT_DataField selectByPrimaryKey(String datafieldbo) throws Exception;
+	
+	public List<Map<String, Object>> retrieve(String DataField) throws Exception;
+	
+	public List<PT_DataField> selectByAnyKey(PT_DataField ptDataFieldBean) throws Exception;
+	public List<PT_DataField> selectAll();
 
 	public int updateByPrimaryKeySelective(PT_DataField ptDataFieldBean) throws Exception;
 

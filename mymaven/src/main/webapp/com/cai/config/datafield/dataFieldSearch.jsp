@@ -7,10 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;utf-8">
 <title>数据字段定义</title>
-<link href="${pageContext.request.contextPath}/com/imes/frame/css/css.css" rel="stylesheet" type="text/css" />
-<script src="${pageContext.request.contextPath}/com/imes/frame/js/yui_3.18.1/yui/yui-min.js"></script>
-<script src="${pageContext.request.contextPath}/com/imes/frame/js/yui-common.js"></script>
+<link href="${pageContext.request.contextPath}/com/cai/frame/css/css.css" rel="stylesheet" type="text/css" />
+<script src="${pageContext.request.contextPath}/com/cai/frame/js/yui_3.18.1/yui/yui-min.js"></script>
+<script src="${pageContext.request.contextPath}/com/cai/frame/js/yui-common.js"></script>
 <script type="text/javascript">
+var table;//
+var HANDLE = "";
 var rootPath = '${rootPath}';
 
 YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-menunav', function(Y){
@@ -96,22 +98,21 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 	table = new Y.DataTable({
 		columns: [
 	  	    //{ key: 'id', label: '序列', width: '10%' },
-		    { key: 'PLANT',  label: '工厂',width: '10%' },
-		    { key: 'DATA_FIELD', label: '字段名称', width: '10%' },
-		    { key: 'DATA_TAG', label: '字段标识', width: '10%' },
-		    { key: 'DESCRIPTION', label: '字段描述', width: '15%' },
-		    { key: 'FIELD_TYPE', label: '类型', width: '10%' },
-		    { key: 'MASK_GROUP', label: '掩码', width: '10%' },
-		    { key: 'FIELD_UNIT', label: '单位', width: '10%' },
-		    { key: 'HANDLE', label: '明细',
+		    { key: 'sequence',  label: '字段编号',width: '10%' },
+		    { key: 'dataField', label: '字段名称', width: '10%' },
+		    { key: 'dataTag', label: '字段标识', width: '10%' },
+		    { key: 'description', label: '字段描述', width: '15%' },
+		    { key: 'fieldType', label: '类型', width: '10%' },
+		    { key: 'ptMaskGroupBo', label: '掩码', width: '10%' },
+		    { key: 'fieldUnit', label: '单位', width: '10%' },
+		    { key: 'HANDLE', label: '操作',
 		    	
 		    	formatter: function(o){
-		        	var plant = o.data.PLANT;
-		        	var data_field = o.data.DATA_FIELD;
+		        	var datafield = o.data.dataField;
 		        	var htmlStr = "";
-		        	htmlStr = '<a href="${rootPath}/config/datafield/gotoPage.html?OPER=CHECK&DATA_FIELD=' + data_field + '&PLANT=' + plant + '">查看</a>&nbsp;&nbsp;&nbsp;'+
-				     		   '<a href="${rootPath}/config/datafield/gotoPage.html?OPER=UPDATE&DATA_FIELD=' + data_field + '&PLANT=' + plant + '">更新</a>&nbsp;&nbsp;&nbsp;'+
-				     		   '<a href="${rootPath}/config/datafield/gotoPage.html?OPER=DELETE&DATA_FIELD=' + data_field + '&PLANT=' + plant + '">删除</a>';
+		        	htmlStr = '<a href="${rootPath}/config/datafield/gotoPage.html?OPER=CHECK&DATA_FIELD=' + datafield +  '">查看</a>&nbsp;&nbsp;&nbsp;'+
+				     		   '<a href="${rootPath}/config/datafield/gotoPage.html?OPER=UPDATE&DATA_FIELD=' + datafield +  '">更新</a>&nbsp;&nbsp;&nbsp;'+
+				     		   '<a href="${rootPath}/config/datafield/gotoPage.html?OPER=DELETE&DATA_FIELD=' + datafield +  '">删除</a>';
 				    return htmlStr;				   
 		        },
 	        width: '15%',
@@ -208,6 +209,7 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 							<td class="ftkeydatatdlabel">类型:</td>
 							<td>
 							     <select id="FIELD_TYPE" name="FIELD_TYPE" class="type">
+									<option value="">请选择</option>
 									<option value="int">数值</option>
                                 	<option value="char">文本</option>
                                 	<option value="boolean">文本域</option>
@@ -223,6 +225,7 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 							<td class="ftkeydatatdlabel">单位:</td>
 							<td>
 								<select name="unit" >
+								<option value="">请选择&nbsp;&nbsp;&nbsp;&nbsp;</option>
 								<option value="cm">厘米(cm)&nbsp;&nbsp;&nbsp;</option>
                                 <option value="mm">毫米(dm)&nbsp;&nbsp;&nbsp;</option>
                                 <option value="dm">分米(mm)&nbsp;&nbsp;&nbsp;</option>

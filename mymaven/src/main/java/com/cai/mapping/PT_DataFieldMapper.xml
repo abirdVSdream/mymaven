@@ -2,242 +2,209 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cai.dao.PT_DataFieldMapper" >
   <resultMap id="BaseResultMap" type="com.cai.pojo.PT_DataField" >
-    <id column="datafieldBo" property="datafieldbo" jdbcType="VARCHAR" />
-    <result column="datafield" property="datafield" jdbcType="VARCHAR" />
-    <result column="dataTag" property="datatag" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="fieldType" property="fieldtype" jdbcType="VARCHAR" />
-    <result column="maskgroupBo" property="maskgroupbo" jdbcType="VARCHAR" />
-    <result column="fieldUnit" property="fieldunit" jdbcType="VARCHAR" />
+    <id column="DATA_FIELD" property="dataField" jdbcType="VARCHAR" />
+    <result column="SEQUENCE" property="sequence" jdbcType="VARCHAR" />
+    <result column="DATA_TAG" property="dataTag" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="FIELD_TYPE" property="fieldType" jdbcType="VARCHAR" />
+    <result column="PT_MASK_GROUP_BO" property="ptMaskGroupBo" jdbcType="VARCHAR" />
+    <result column="FIELD_UNIT" property="fieldUnit" jdbcType="VARCHAR" />
+    <result column="BOOLEAN_ONE_VALUE" property="booleanOneValue" jdbcType="VARCHAR" />
+    <result column="BOOLEAN_ZERO_VALUE" property="booleanZeroValue" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="MODIFIED_DATE" property="modifiedDate" jdbcType="DATE" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
-    datafieldBo, datafield, dataTag, description, fieldType, maskgroupBo, fieldUnit
+    DATA_FIELD, SEQUENCE, DATA_TAG, DESCRIPTION, FIELD_TYPE, PT_MASK_GROUP_BO, FIELD_UNIT, 
+    BOOLEAN_ONE_VALUE, BOOLEAN_ZERO_VALUE, CREATE_DATE, MODIFIED_DATE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cai.pojo.PT_DataFieldExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from datafield
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from datafield
-    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+    from pt_data_field
+    where DATA_FIELD = #{dataField,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByAnyOne" resultMap="BaseResultMap" parameterType="com.cai.pojo.PT_DataField" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_data_field
+    where
+      <if test="dataField != null and dataField != ''" >
+        DATA_FIELD = #{dataField,jdbcType=VARCHAR}
+      </if>
+   	  <if test="dataTag != null and dataTag !=''" >
+        AND DATA_TAG = #{dataTag,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null and description != ''" >
+        AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="fieldType != null and fieldType != ''" >
+        AND FIELD_TYPE = #{fieldType,jdbcType=VARCHAR}
+      </if>
+      <if test="ptMaskGroupBo != null and ptMaskGroupBo != ''" >
+        AND PT_MASK_GROUP_BO = #{ptMaskGroupBo,jdbcType=VARCHAR}
+      </if>
+      <if test="fieldUnit != null and fieldUnit != ''" >
+        AND FIELD_UNIT = #{fieldUnit,jdbcType=VARCHAR}
+      </if>
+      <if test="booleanOneValue != null and booleanOneValue != ''" >
+        AND BOOLEAN_ONE_VALUE = #{booleanOneValue,jdbcType=VARCHAR}
+      </if>
+      <if test="booleanZeroValue != null and booleanZeroValue != ''" >
+        AND BOOLEAN_ZERO_VALUE = #{ptMaskGroupBo,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        AND CREATE_DATE = #{fieldUnit,jdbcType=VARCHAR}
+      </if>
+      <if test="modifiedDate != null and modifiedDate != ''" >
+        AND MODIFIED_DATE = #{modifiedDate,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pt_data_field
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from datafield
-    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.cai.pojo.PT_DataFieldExample" >
-    delete from datafield
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
+    delete from pt_data_field
+    where DATA_FIELD = #{dataField,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cai.pojo.PT_DataField" >
-    insert into datafield (datafieldBo, datafield, dataTag, 
-      description, fieldType, maskgroupBo, 
-      fieldUnit)
-    values (#{datafieldbo,jdbcType=VARCHAR}, #{datafield,jdbcType=VARCHAR}, #{datatag,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{fieldtype,jdbcType=VARCHAR}, #{maskgroupbo,jdbcType=VARCHAR}, 
-      #{fieldunit,jdbcType=VARCHAR})
+    insert into pt_data_field (DATA_FIELD, SEQUENCE, DATA_TAG, 
+      DESCRIPTION, FIELD_TYPE, PT_MASK_GROUP_BO, 
+      FIELD_UNIT, BOOLEAN_ONE_VALUE, BOOLEAN_ZERO_VALUE, 
+      CREATE_DATE, MODIFIED_DATE)
+    values (#{dataField,jdbcType=VARCHAR}, #{sequence,jdbcType=VARCHAR}, #{dataTag,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, #{ptMaskGroupBo,jdbcType=VARCHAR}, 
+      #{fieldUnit,jdbcType=VARCHAR}, #{booleanOneValue,jdbcType=VARCHAR}, #{booleanZeroValue,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=DATE}, #{modifiedDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.cai.pojo.PT_DataField" >
-    insert into datafield
+    insert into pt_data_field
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="datafieldbo != null" >
-        datafieldBo,
+      <if test="dataField != null" >
+        DATA_FIELD,
       </if>
-      <if test="datafield != null" >
-        datafield,
+      <if test="sequence != null" >
+        SEQUENCE,
       </if>
-      <if test="datatag != null" >
-        dataTag,
+      <if test="dataTag != null" >
+        DATA_TAG,
       </if>
       <if test="description != null" >
-        description,
+        DESCRIPTION,
       </if>
-      <if test="fieldtype != null" >
-        fieldType,
+      <if test="fieldType != null" >
+        FIELD_TYPE,
       </if>
-      <if test="maskgroupbo != null" >
-        maskgroupBo,
+      <if test="ptMaskGroupBo != null" >
+        PT_MASK_GROUP_BO,
       </if>
-      <if test="fieldunit != null" >
-        fieldUnit,
+      <if test="fieldUnit != null" >
+        FIELD_UNIT,
+      </if>
+      <if test="booleanOneValue != null" >
+        BOOLEAN_ONE_VALUE,
+      </if>
+      <if test="booleanZeroValue != null" >
+        BOOLEAN_ZERO_VALUE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifiedDate != null" >
+        MODIFIED_DATE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="datafieldbo != null" >
-        #{datafieldbo,jdbcType=VARCHAR},
+      <if test="dataField != null" >
+        #{dataField,jdbcType=VARCHAR},
       </if>
-      <if test="datafield != null" >
-        #{datafield,jdbcType=VARCHAR},
+      <if test="sequence != null" >
+        #{sequence,jdbcType=VARCHAR},
       </if>
-      <if test="datatag != null" >
-        #{datatag,jdbcType=VARCHAR},
+      <if test="dataTag != null" >
+        #{dataTag,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="fieldtype != null" >
-        #{fieldtype,jdbcType=VARCHAR},
+      <if test="fieldType != null" >
+        #{fieldType,jdbcType=VARCHAR},
       </if>
-      <if test="maskgroupbo != null" >
-        #{maskgroupbo,jdbcType=VARCHAR},
+      <if test="ptMaskGroupBo != null" >
+        #{ptMaskGroupBo,jdbcType=VARCHAR},
       </if>
-      <if test="fieldunit != null" >
-        #{fieldunit,jdbcType=VARCHAR},
+      <if test="fieldUnit != null" >
+        #{fieldUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="booleanOneValue != null" >
+        #{booleanOneValue,jdbcType=VARCHAR},
+      </if>
+      <if test="booleanZeroValue != null" >
+        #{booleanZeroValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="modifiedDate != null" >
+        #{modifiedDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cai.pojo.PT_DataFieldExample" resultType="java.lang.Integer" >
-    select count(*) from datafield
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update datafield
-    <set >
-      <if test="record.datafieldbo != null" >
-        datafieldBo = #{record.datafieldbo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.datafield != null" >
-        datafield = #{record.datafield,jdbcType=VARCHAR},
-      </if>
-      <if test="record.datatag != null" >
-        dataTag = #{record.datatag,jdbcType=VARCHAR},
-      </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fieldtype != null" >
-        fieldType = #{record.fieldtype,jdbcType=VARCHAR},
-      </if>
-      <if test="record.maskgroupbo != null" >
-        maskgroupBo = #{record.maskgroupbo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fieldunit != null" >
-        fieldUnit = #{record.fieldunit,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update datafield
-    set datafieldBo = #{record.datafieldbo,jdbcType=VARCHAR},
-      datafield = #{record.datafield,jdbcType=VARCHAR},
-      dataTag = #{record.datatag,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      fieldType = #{record.fieldtype,jdbcType=VARCHAR},
-      maskgroupBo = #{record.maskgroupbo,jdbcType=VARCHAR},
-      fieldUnit = #{record.fieldunit,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.PT_DataField" >
-    update datafield
+    update pt_data_field
     <set >
-      <if test="datafield != null" >
-        datafield = #{datafield,jdbcType=VARCHAR},
+      <if test="sequence != null" >
+        SEQUENCE = #{sequence,jdbcType=VARCHAR},
       </if>
-      <if test="datatag != null" >
-        dataTag = #{datatag,jdbcType=VARCHAR},
+      <if test="dataTag != null" >
+        DATA_TAG = #{dataTag,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="fieldtype != null" >
-        fieldType = #{fieldtype,jdbcType=VARCHAR},
+      <if test="fieldType != null" >
+        FIELD_TYPE = #{fieldType,jdbcType=VARCHAR},
       </if>
-      <if test="maskgroupbo != null" >
-        maskgroupBo = #{maskgroupbo,jdbcType=VARCHAR},
+      <if test="ptMaskGroupBo != null" >
+        PT_MASK_GROUP_BO = #{ptMaskGroupBo,jdbcType=VARCHAR},
       </if>
-      <if test="fieldunit != null" >
-        fieldUnit = #{fieldunit,jdbcType=VARCHAR},
+      <if test="fieldUnit != null" >
+        FIELD_UNIT = #{fieldUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="booleanOneValue != null" >
+        BOOLEAN_ONE_VALUE = #{booleanOneValue,jdbcType=VARCHAR},
+      </if>
+      <if test="booleanZeroValue != null" >
+        BOOLEAN_ZERO_VALUE = #{booleanZeroValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="modifiedDate != null" >
+        MODIFIED_DATE = #{modifiedDate,jdbcType=DATE},
       </if>
     </set>
-    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+    where DATA_FIELD = #{dataField,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cai.pojo.PT_DataField" >
-    update datafield
-    set datafield = #{datafield,jdbcType=VARCHAR},
-      dataTag = #{datatag,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      fieldType = #{fieldtype,jdbcType=VARCHAR},
-      maskgroupBo = #{maskgroupbo,jdbcType=VARCHAR},
-      fieldUnit = #{fieldunit,jdbcType=VARCHAR}
-    where datafieldBo = #{datafieldbo,jdbcType=VARCHAR}
+    update pt_data_field
+    set SEQUENCE = #{sequence,jdbcType=VARCHAR},
+      DATA_TAG = #{dataTag,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      FIELD_TYPE = #{fieldType,jdbcType=VARCHAR},
+      PT_MASK_GROUP_BO = #{ptMaskGroupBo,jdbcType=VARCHAR},
+      FIELD_UNIT = #{fieldUnit,jdbcType=VARCHAR},
+      BOOLEAN_ONE_VALUE = #{booleanOneValue,jdbcType=VARCHAR},
+      BOOLEAN_ZERO_VALUE = #{booleanZeroValue,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=DATE},
+      MODIFIED_DATE = #{modifiedDate,jdbcType=DATE}
+    where DATA_FIELD = #{dataField,jdbcType=VARCHAR}
   </update>
 </mapper>

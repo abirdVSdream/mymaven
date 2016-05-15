@@ -1,22 +1,18 @@
 <%@ page language="java" contentType="text/html; utf8"
     pageEncoding="utf-8" deferredSyntaxAllowedAsLiteral="true"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="com.imes.frame.util.UserInf"%>
-<%request.setAttribute("rootPath",request.getContextPath());
-	UserInf userInf = new UserInf();
-%>
+<%request.setAttribute("rootPath",request.getContextPath());%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>数据字段定义</title>
-<link href="${pageContext.request.contextPath}/com/imes/frame/css/css.css" rel="stylesheet" type="text/css" />
-<script src="${pageContext.request.contextPath}/com/imes/frame/js/yui_3.18.1/yui/yui-min.js"></script>
-<script src="${pageContext.request.contextPath}/com/imes/frame/js/yui-common.js"></script>
+<link href="${pageContext.request.contextPath}/com/cai/frame/css/css.css" rel="stylesheet" type="text/css" />
+<script src="${pageContext.request.contextPath}/com/cai/frame/js/yui_3.18.1/yui/yui-min.js"></script>
+<script src="${pageContext.request.contextPath}/com/cai/frame/js/yui-common.js"></script>
 <script type="text/javascript">
 var rootPath = '${rootPath}';
 var table;//
-var company = '<%= userInf.getCompany() %>';
 var HANDLE = "";
 var result = '${result}';
 YUI().use('datatable', 'datatable-scroll', 'datatype-number', 'node', function (Y) {	

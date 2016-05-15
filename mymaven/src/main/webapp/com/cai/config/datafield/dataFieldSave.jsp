@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>数据字段定义</title>
-<link href="${pageContext.request.contextPath}/com/imes/frame/css/css.css" rel="stylesheet" type="text/css" />
-<script src="${pageContext.request.contextPath}/com/imes/frame/js/yui_3.18.1/yui/yui-min.js"></script>
-<script src="${pageContext.request.contextPath}/com/imes/frame/js/yui-common.js"></script>
+<link href="${pageContext.request.contextPath}/com/cai/frame/css/css.css" rel="stylesheet" type="text/css" />
+<script src="${pageContext.request.contextPath}/com/cai/frame/js/yui_3.18.1/yui/yui-min.js"></script>
+<script src="${pageContext.request.contextPath}/com/cai/frame/js/yui-common.js"></script>
 <script type="text/javascript"> 
 var rootPath = '${rootPath}';
 var table;//
@@ -197,6 +197,8 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 		Y.one('#DESCRIPTION').set("value", "");
 		Y.one('#DATA_TAG').set("value", "");
 		Y.one('#PT_MASK_GROUP_BO').set("value", "");
+		Y.one('#FIELD_TYPE').set("value", "");
+		Y.one('#FIELD_UNIT').set("value", "");
 		Y.one('#value_1').set("value", "");
 		Y.one('#value_0').set("value", "");
 		Y.one('#infoArea').set("innerHTML", "");
@@ -353,6 +355,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 								<td class="ftkeydatatdlabel">类型:</td>
 								<td class="ftkeydatatdinput">
 								    <select id="FIELD_TYPE" name="FIELD_TYPE">
+								    	<option value="">请选择</option>
 										<option value="number">数值</option>
 		                               	<option value="text">文本</option>
 		                               	<option value="textarea">文本域</option>
@@ -380,13 +383,14 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 								<td class="ftkeydatatdlabel">单位:</td>
 								<td  class="ftkeydatatdinput">
 									<select id="FIELD_UNIT" >
-									<option value="cm">厘米(cm)&nbsp;&nbsp;&nbsp;</option>
-	                                <option value="mm">毫米(dm)&nbsp;&nbsp;&nbsp;</option>
-	                                <option value="dm">分米(mm)&nbsp;&nbsp;&nbsp;</option>
-	                                <option value="m">米(m)&nbsp;&nbsp;&nbsp;&nbsp;</option>
-	                                <option value="g">克(g)&nbsp;&nbsp;&nbsp;&nbsp;</option>
-	                                <option value="kg">千克(kg)&nbsp;&nbsp;&nbsp;</option>
-	                                <option value="pcs">个(pcs)&nbsp;&nbsp;&nbsp;</option>
+									<option value="">请选择&nbsp;&nbsp;</option>
+									<option value="cm">厘米(cm)&nbsp;</option>
+	                                <option value="mm">毫米(dm)&nbsp;</option>
+	                                <option value="dm">分米(mm)&nbsp;</option>
+	                                <option value="m">米(m)&nbsp;&nbsp;</option>
+	                                <option value="g">克(g)&nbsp;&nbsp;</option>
+	                                <option value="kg">千克(kg)&nbsp;</option>
+	                                <option value="pcs">个(pcs)&nbsp;</option>
 									</select>
 								</td>
 							</tr>

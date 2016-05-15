@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cai.dao.PT_DataFileListMapper" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.PT_DataFileList" >
+    <id column="HANDLE" property="handle" jdbcType="VARCHAR" />
+    <result column="PT_DATA_FIELD_BO" property="ptDataFieldBo" jdbcType="VARCHAR" />
+    <result column="SEQUENCE" property="sequence" jdbcType="VARCHAR" />
+    <result column="DATA_VALUE" property="dataValue" jdbcType="VARCHAR" />
+    <result column="DATA_TAG" property="dataTag" jdbcType="VARCHAR" />
+    <result column="IS_DEFAULT" property="isDefault" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    HANDLE, PT_DATA_FIELD_BO, SEQUENCE, DATA_VALUE, DATA_TAG, IS_DEFAULT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_data_field_list
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pt_data_field_list
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cai.pojo.PT_DataFileList" >
+    insert into pt_data_field_list (HANDLE, PT_DATA_FIELD_BO, SEQUENCE, 
+      DATA_VALUE, DATA_TAG, IS_DEFAULT
+      )
+    values (#{handle,jdbcType=VARCHAR}, #{ptDataFieldBo,jdbcType=VARCHAR}, #{sequence,jdbcType=VARCHAR}, 
+      #{dataValue,jdbcType=VARCHAR}, #{dataTag,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cai.pojo.PT_DataFileList" >
+    insert into pt_data_field_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="handle != null" >
+        HANDLE,
+      </if>
+      <if test="ptDataFieldBo != null" >
+        PT_DATA_FIELD_BO,
+      </if>
+      <if test="sequence != null" >
+        SEQUENCE,
+      </if>
+      <if test="dataValue != null" >
+        DATA_VALUE,
+      </if>
+      <if test="dataTag != null" >
+        DATA_TAG,
+      </if>
+      <if test="isDefault != null" >
+        IS_DEFAULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="handle != null" >
+        #{handle,jdbcType=VARCHAR},
+      </if>
+      <if test="ptDataFieldBo != null" >
+        #{ptDataFieldBo,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="dataValue != null" >
+        #{dataValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dataTag != null" >
+        #{dataTag,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.PT_DataFileList" >
+    update pt_data_field_list
+    <set >
+      <if test="ptDataFieldBo != null" >
+        PT_DATA_FIELD_BO = #{ptDataFieldBo,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        SEQUENCE = #{sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="dataValue != null" >
+        DATA_VALUE = #{dataValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dataTag != null" >
+        DATA_TAG = #{dataTag,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        IS_DEFAULT = #{isDefault,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.PT_DataFileList" >
+    update pt_data_field_list
+    set PT_DATA_FIELD_BO = #{ptDataFieldBo,jdbcType=VARCHAR},
+      SEQUENCE = #{sequence,jdbcType=VARCHAR},
+      DATA_VALUE = #{dataValue,jdbcType=VARCHAR},
+      DATA_TAG = #{dataTag,jdbcType=VARCHAR},
+      IS_DEFAULT = #{isDefault,jdbcType=VARCHAR}
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,42 +1,66 @@
 package com.cai.pojo;
 
+import java.util.Date;
+import java.util.List;
+
+
 public class PT_DataField {
-    private String datafieldbo;
+    private String dataField;
 
-    private String datafield;
+    private String sequence;
 
-    private String datatag;
+    private String dataTag;
 
     private String description;
 
-    private String fieldtype;
+    private String fieldType;
 
-    private String maskgroupbo;
+    private String ptMaskGroupBo;
 
-    private String fieldunit;
+    private String fieldUnit;
 
-    public String getDatafieldbo() {
-        return datafieldbo;
+    private String booleanOneValue;
+
+    private String booleanZeroValue;
+
+    private Date createDate;
+
+    private Date modifiedDate;
+    
+    private List<PT_DataFileList> dataFieldValueList;
+    
+    public List<PT_DataFileList> getDataFieldValueList() {
+		return dataFieldValueList;
+	}
+	
+
+	public void setDataFieldValueList(List<PT_DataFileList> dataFieldValueList) {
+		this.dataFieldValueList = dataFieldValueList;
+	}
+	
+
+	public String getDataField() {
+        return dataField;
     }
 
-    public void setDatafieldbo(String datafieldbo) {
-        this.datafieldbo = datafieldbo == null ? null : datafieldbo.trim();
+    public void setDataField(String dataField) {
+        this.dataField = dataField == null ? null : dataField.trim();
     }
 
-    public String getDatafield() {
-        return datafield;
+    public String getSequence() {
+        return sequence;
     }
 
-    public void setDatafield(String datafield) {
-        this.datafield = datafield == null ? null : datafield.trim();
+    public void setSequence(String sequence) {
+        this.sequence = sequence == null ? null : sequence.trim();
     }
 
-    public String getDatatag() {
-        return datatag;
+    public String getDataTag() {
+        return dataTag;
     }
 
-    public void setDatatag(String datatag) {
-        this.datatag = datatag == null ? null : datatag.trim();
+    public void setDataTag(String dataTag) {
+        this.dataTag = dataTag == null ? null : dataTag.trim();
     }
 
     public String getDescription() {
@@ -47,27 +71,59 @@ public class PT_DataField {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getFieldtype() {
-        return fieldtype;
+    public String getFieldType() {
+        return fieldType;
     }
 
-    public void setFieldtype(String fieldtype) {
-        this.fieldtype = fieldtype == null ? null : fieldtype.trim();
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType == null ? null : fieldType.trim();
     }
 
-    public String getMaskgroupbo() {
-        return maskgroupbo;
+    public String getPtMaskGroupBo() {
+        return ptMaskGroupBo;
     }
 
-    public void setMaskgroupbo(String maskgroupbo) {
-        this.maskgroupbo = maskgroupbo == null ? null : maskgroupbo.trim();
+    public void setPtMaskGroupBo(String ptMaskGroupBo) {
+        this.ptMaskGroupBo = ptMaskGroupBo == null ? null : ptMaskGroupBo.trim();
     }
 
-    public String getFieldunit() {
-        return fieldunit;
+    public String getFieldUnit() {
+        return fieldUnit;
     }
 
-    public void setFieldunit(String fieldunit) {
-        this.fieldunit = fieldunit == null ? null : fieldunit.trim();
+    public void setFieldUnit(String fieldUnit) {
+        this.fieldUnit = fieldUnit == null ? null : fieldUnit.trim();
+    }
+
+    public String getBooleanOneValue() {
+        return booleanOneValue;
+    }
+
+    public void setBooleanOneValue(String booleanOneValue) {
+        this.booleanOneValue = booleanOneValue == null ? null : booleanOneValue.trim();
+    }
+
+    public String getBooleanZeroValue() {
+        return booleanZeroValue;
+    }
+
+    public void setBooleanZeroValue(String booleanZeroValue) {
+        this.booleanZeroValue = booleanZeroValue == null ? null : booleanZeroValue.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 }
