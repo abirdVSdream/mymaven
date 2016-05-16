@@ -18,8 +18,9 @@ public interface DataFieldService
 	public List<Map<String, Object>> retrieve(String DataField) throws Exception;
 	
 	public List<PT_DataField> selectByAnyKey(PT_DataField ptDataFieldBean) throws Exception;
+	
 	public List<PT_DataField> selectAll();
-
+	
 	public int updateByPrimaryKeySelective(PT_DataField ptDataFieldBean) throws Exception;
 
 	public int updateByPrimaryKey(PT_DataField ptDataFieldBean) throws Exception;

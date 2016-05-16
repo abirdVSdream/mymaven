@@ -18,9 +18,10 @@
     DATA_FIELD, SEQUENCE, DATA_TAG, DESCRIPTION, FIELD_TYPE, PT_MASK_GROUP_BO, FIELD_UNIT, 
     BOOLEAN_ONE_VALUE, BOOLEAN_ZERO_VALUE, CREATE_DATE, MODIFIED_DATE
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultType="java.util.HashMap" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
+    DATA_FIELD, SEQUENCE, DATA_TAG, DESCRIPTION, FIELD_TYPE, PT_MASK_GROUP_BO, FIELD_UNIT, 
+    BOOLEAN_ONE_VALUE, BOOLEAN_ZERO_VALUE
     from pt_data_field
     where DATA_FIELD = #{dataField,jdbcType=VARCHAR}
   </select>

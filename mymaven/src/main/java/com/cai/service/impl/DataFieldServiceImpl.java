@@ -18,6 +18,7 @@ import com.cai.service.DataFieldService;
 public class DataFieldServiceImpl implements DataFieldService {
 	@Resource
 	private PT_DataFieldMapper dataFieldDao;
+	@Resource
 	private PT_DataFileListMapper dataFileListDao;
 
 
@@ -127,7 +128,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	     * 按主键查询数据
 	     * @param ptDataFieldBean
 	     * @return
-	     * @throws ImesBussinessException
+	     * @throws Exception
 	     */
 	    public List<Map<String, Object>> retrieve(String DataField)
 	        throws Exception
@@ -146,6 +147,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	            // 存放主表PT_DATA_FIELD查询结果
 	            Map<String, Object> mapDatafiledResult =  this.dataFieldDao.selectByPrimaryKey(DataField);
 	            
+	            
 	            // 查询从表数据
 	            if (null == mapDatafiledResult)
 	            {
@@ -153,10 +155,10 @@ public class DataFieldServiceImpl implements DataFieldService {
 	            }
 	            String ptDataFieldBo = null;
 	            
-	            ptDataFieldBo = (String)mapDatafiledResult.get("dataField")+(String)mapDatafiledResult.get("squence");
+	            ptDataFieldBo = mapDatafiledResult.get("SEQUENCE")+(String)mapDatafiledResult.get("DATA_FIELD");
 	            
 	            
-	            mapDatafiledResult.put("dataFieldValueList", dataFileListDao.selectByPrimaryKey(ptDataFieldBo));
+	            mapDatafiledResult.put("dataFieldValueList",this.dataFileListDao.selectByPrimaryKey(ptDataFieldBo));
 	            mapResult.add(mapDatafiledResult);
 	            
 	            return mapResult;

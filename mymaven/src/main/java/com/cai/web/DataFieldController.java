@@ -1,5 +1,6 @@
 package com.cai.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,24 @@ public class DataFieldController extends BaseController
 		urlMap.put("UPDATE", UPDATE_URL);
 		urlMap.put("DELETE", DELETE_URL);
 		
+		try {
+			
+		request.setCharacterEncoding("UTF-8");
 		
+		response.setCharacterEncoding("UTF-8");
+		
+		String datafield = request.getParameter("DATA_FIELD");
+		if(!datafield.equals(""))
+		{
+			List<Map<String, Object>> result = dataFieldService.retrieve(datafield);
+			request.setAttribute("result", getJsonText(result));
+		}
+		
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return gotoIndexPage(request, response, urlMap);
 	}
 	
@@ -162,11 +180,10 @@ public class DataFieldController extends BaseController
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			
-			PT_DataField  ptdatafieldbean =  new PT_DataField();
 			String dataStr = request.getParameter("DATA");
 			JSONObject jsonObj = JSONObject.fromObject(dataStr);
 
-			String data_field = jsonObj.optString("DATA_FIELD");
+			String datafield = jsonObj.optString("DATA_FIELD");
 //			String description = jsonObj.optString("DESCRIPTION");
 //			String data_tag = jsonObj.optString("DATA_TAG");
 //			String mark_group = jsonObj.optString("pt_mask_group_bo");
@@ -174,25 +191,10 @@ public class DataFieldController extends BaseController
 //			String field_unit = jsonObj.optString("FIELD_UNIT");
 //			String value_one = jsonObj.optString("value_1");
 //			String value_zone = jsonObj.optString("value_1");
-			
-			ptdatafieldbean.setDataField(data_field);
-//			ptdatafieldbean.setDescription(description);
-//			ptdatafieldbean.setDataTag(data_tag);
-			
-//            PtMaskGroupBean maskGroupBo=new PtMaskGroupBean();
-//			maskGroupBo.setCompany(this.getCompany(request));
-//			maskGroupBo.setPlant(this.getPlant(request));
-//			maskGroupBo.setMaskGroup(mark_group);
-//			ptdatafieldbean.setPtMaskGroupBo(maskGroupBo);
-		
-			ptdatafieldbean.setFieldType(field_type);
-			ptdatafieldbean.setFieldUnit(field_unit);
-			ptdatafieldbean.setBooleanOneValue(value_one);
-			ptdatafieldbean.setBooleanZeroValue(value_zone);
-			ptdatafieldbean.setCompany(this.getCompany(request));
-			
-			List<Map<String, Object>> result = dataFieldService.retrieve(ptdatafieldbean);
-			outPrintJsonText(request, response, "");
+				
+			List<Map<String, Object>> result = dataFieldService.retrieve(datafield);
+			outPrintJsonText(request, response, result);
+
 		} catch (Exception e) {
 			outPrintJsonException(request, response, e);
 		}

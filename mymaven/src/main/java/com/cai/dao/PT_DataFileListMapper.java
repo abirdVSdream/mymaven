@@ -1,6 +1,7 @@
 package com.cai.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cai.pojo.PT_DataField2;
 import com.cai.pojo.PT_DataFileList;
@@ -12,7 +13,7 @@ public interface PT_DataFileListMapper {
 
     int insertSelective(PT_DataFileList record);
 
-    List<PT_DataFileList> selectByPrimaryKey(String handle);
+    List<Map<String,Object>> selectByPrimaryKey(String handle);
     
     int updateByPrimaryKeySelective(PT_DataFileList record);
 
