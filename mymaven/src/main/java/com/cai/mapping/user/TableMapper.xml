@@ -11,19 +11,19 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from table
+    from tabl
     where tableid = #{tableid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from table
+    delete from tabl
     where tableid = #{tableid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cai.pojo.user.Table" >
-    insert into table (tableid, tablename)
+    insert into tabl (tableid, tablename)
     values (#{tableid,jdbcType=VARCHAR}, #{tablename,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cai.pojo.user.Table" >
-    insert into table
+    insert into tabl
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tableid != null" >
         tableid,
@@ -42,7 +42,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.user.Table" >
-    update table
+    update tabl
     <set >
       <if test="tablename != null" >
         tablename = #{tablename,jdbcType=VARCHAR},
@@ -51,7 +51,7 @@
     where tableid = #{tableid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cai.pojo.user.Table" >
-    update table
+    update tabl
     set tablename = #{tablename,jdbcType=VARCHAR}
     where tableid = #{tableid,jdbcType=VARCHAR}
   </update>

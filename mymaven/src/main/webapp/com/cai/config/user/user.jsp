@@ -27,7 +27,7 @@
 	<tr>
 		<td align="center"><input type="text" value="${user.userid}" readonly="readonly"/></td>
 		<td align="center"><input type="text" value="${user.username}" readonly="readonly"/></td>
-		<td align="center"><a href="">用户权限管理</a></td>
+		<td align="center"><a href="${rootPath}/permission.html?userid=${user.userid}">用户权限管理</a></td>
 	</tr>
 </table>
 </div>

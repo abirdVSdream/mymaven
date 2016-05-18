@@ -1,5 +1,7 @@
 package com.cai.dao.user;
 
+import java.util.List;
+
 import com.cai.pojo.user.Correlationupt;
 
 public interface CorrelationuptMapper {
@@ -10,7 +12,9 @@ public interface CorrelationuptMapper {
     int insertSelective(Correlationupt record);
 
     Correlationupt selectByPrimaryKey(String correlationid);
-
+    
+    List<Correlationupt> selectByUserid(String userid);
+    
     int updateByPrimaryKeySelective(Correlationupt record);
 
     int updateByPrimaryKey(Correlationupt record);

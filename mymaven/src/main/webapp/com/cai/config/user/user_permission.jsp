@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,54 +31,57 @@
 	<th>审核权限</th>
 	</tr>
 	<!-- 此处可遍历 List<CorrelationUPT>-->
+	<c:forEach items="${lismap}" var="lismap" varStatus="co">
 	<tr>
-		<td align="center"><input type="checkbox" value="${CorrelationUPT.correlationid}"/></td>
+		<td align="center"><input type="checkbox" value='${lismap.("correlationuptList"+co).correlationid}'/></td>
 		<td align="center">
-			<input type="text" value="${table.tablename}"/>
+			<!-- <input type="text" value="${table.tablename}"/> -->
+			<input type="text" value='${lismap.("table"+co).tablename}'/>
 		</td>
 		<td align="center">
-			<select >
+			<select value="${lismap.permission.add}">
 				<option>请选择</option>
 				<option value="yes">有权限</option>
 				<option value="no">无权限</option>
 			</select>
 		</td>
 		<td align="center">
-			<select >
+			<select value="${permissionArray[co+1].delete}">
 				<option>请选择</option>
 				<option value="yes">有权限</option>
 				<option value="no">无权限</option>
 			</select>
 		</td>
 		<td align="center">
-			<select >
+			<select value="${permissionArray[co+1].update}">
 				<option>请选择</option>
 				<option value="yes">有权限</option>
 				<option value="no">无权限</option>
 			</select>
 		</td>
 		<td align="center">
-			<select >
+			<select value="${permissionArray[co+1].search}">
 				<option>请选择</option>
 				<option value="yes">有权限</option>
 				<option value="no">无权限</option>
 			</select>
 		</td>
 		<td align="center">
-			<select >
+			<select value="${permissionArray[co+1].export}">
 				<option>请选择</option>
 				<option value="yes">有权限</option>
 				<option value="no">无权限</option>
 			</select>
 		</td>
 		<td align="center">
-			<select >
+			<select value="${permissionArray[co+1].check}">
 				<option>请选择</option>
 				<option value="yes">有权限</option>
 				<option value="no">无权限</option>
 			</select>
 		</td>
 	</tr>
+	</c:forEach>
 </table>
 </div>
 
