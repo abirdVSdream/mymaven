@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cai.dao.user.CorrelationuptMapper" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.user.Correlationupt" >
+    <id column="correlationid" property="correlationid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="tableid" property="tableid" jdbcType="VARCHAR" />
+    <result column="permissionid" property="permissionid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    correlationid, userid, tableid, permissionid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from correlationupt
+    where correlationid = #{correlationid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from correlationupt
+    where correlationid = #{correlationid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cai.pojo.user.Correlationupt" >
+    insert into correlationupt (correlationid, userid, tableid, 
+      permissionid)
+    values (#{correlationid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{tableid,jdbcType=VARCHAR}, 
+      #{permissionid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cai.pojo.user.Correlationupt" >
+    insert into correlationupt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="correlationid != null" >
+        correlationid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="tableid != null" >
+        tableid,
+      </if>
+      <if test="permissionid != null" >
+        permissionid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="correlationid != null" >
+        #{correlationid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="tableid != null" >
+        #{tableid,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionid != null" >
+        #{permissionid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.user.Correlationupt" >
+    update correlationupt
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="tableid != null" >
+        tableid = #{tableid,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionid != null" >
+        permissionid = #{permissionid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where correlationid = #{correlationid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.user.Correlationupt" >
+    update correlationupt
+    set userid = #{userid,jdbcType=VARCHAR},
+      tableid = #{tableid,jdbcType=VARCHAR},
+      permissionid = #{permissionid,jdbcType=VARCHAR}
+    where correlationid = #{correlationid,jdbcType=VARCHAR}
+  </update>
+</mapper>

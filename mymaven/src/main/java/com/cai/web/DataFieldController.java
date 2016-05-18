@@ -51,7 +51,7 @@ public class DataFieldController extends BaseController
 		response.setCharacterEncoding("UTF-8");
 		
 		String datafield = request.getParameter("DATA_FIELD");
-		if(!datafield.equals(""))
+		if(!(datafield==null ||datafield.equals("")))
 		{
 			List<Map<String, Object>> result = dataFieldService.retrieve(datafield);
 			request.setAttribute("result", getJsonText(result));

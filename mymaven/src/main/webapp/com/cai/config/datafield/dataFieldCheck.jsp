@@ -337,6 +337,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 						<td class="ftkeydatatdlabel">类型:</td>
 						<td class="ftkeydatatdinput">
 							<select id="FIELD_TYPE" name="FIELD_TYPE">
+								<option value="">请选择</option>
 								<option value="number">数值</option>
 	                           	<option value="text">文本</option>
 	                           	<option value="textarea">文本域</option>
@@ -358,6 +359,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 						<td class="ftkeydatatdlabel">单位:</td>
 						<td class="ftkeydatatdinput">
 							<select id="FIELD_UNIT" >
+								<option value="">请选择&nbsp;&nbsp;</option>
 								<option value="cm">厘米(cm)</option>
 	                            <option value="mm">毫米(dm)</option>
 	                            <option value="dm">分米(mm)</option>
