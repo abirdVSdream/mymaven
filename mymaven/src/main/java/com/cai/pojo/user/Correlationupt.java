@@ -9,8 +9,28 @@ public class Correlationupt {
 	private String tableid;
 	//权限id
 	private String permissionid;
+	//table表数据
+	private Table table;
+	//Permission表数据
+	private Permission permission;
+	
+    public Table getTable() {
+		return table;
+	}
 
-    public String getCorrelationid() {
+	public void setTable(Table table) {
+		this.table = table;
+	}
+
+	public Permission getPermission() {
+		return permission;
+	}
+
+	public void setPermission(Permission permission) {
+		this.permission = permission;
+	}
+
+	public String getCorrelationid() {
         return correlationid;
     }
 

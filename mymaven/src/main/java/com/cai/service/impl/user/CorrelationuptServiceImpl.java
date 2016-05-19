@@ -2,6 +2,7 @@ package com.cai.service.impl.user;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,9 +21,9 @@ import com.cai.service.user.CorrelationuptService;
 public class CorrelationuptServiceImpl implements CorrelationuptService {
 	@Resource
 	private CorrelationuptMapper correlationuptdao;
-	
+	@Resource
 	private PermissionMapper permissiondao;
-	
+	@Resource
 	private TableMapper tabledao;
 
 	public int deleteByPrimaryKey(String correlationid) throws Exception {
@@ -58,7 +59,22 @@ public class CorrelationuptServiceImpl implements CorrelationuptService {
 
 	public List<Correlationupt> selectByUserid(String userid) throws Exception {
 		// TODO Auto-generated method stub
-		return this.correlationuptdao.selectByUserid(userid);
+		
+		List<Correlationupt> correlationuptList = this.correlationuptdao.selectByUserid(userid);
+		if(null==correlationuptList)
+		{
+			return null;
+		}
+		
+		for(int i=0;i<correlationuptList.size();i++)
+		{
+			Table table = this.tabledao.selectByPrimaryKey(correlationuptList.get(i).getTableid());
+			Permission permission =this.permissiondao.selectByPrimaryKey(correlationuptList.get(i).getPermissionid());
+			correlationuptList.get(i).setTable(table);
+			correlationuptList.get(i).setPermission(permission);
+		}
+		
+		return correlationuptList;
 	}
 	
 //	public static void main(String args[])
