@@ -20,5 +20,7 @@ public interface CorrelationuptService
 		public int updateByPrimaryKeySelective(Correlationupt record) throws Exception;
 
 		public int updateByPrimaryKey(Correlationupt record) throws Exception;
+		
+		public int updateByPermissionAndTable(List<Correlationupt> record) throws Exception;
 
 }

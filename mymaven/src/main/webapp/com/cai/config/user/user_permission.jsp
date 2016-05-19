@@ -20,7 +20,7 @@
 </div>
 
 <div align="center">
-<form action="${rootPath}/update.html" method="post">
+<form action="${rootPath}/update.html">
 <table border="1" id="table">
 	<tr>
 	<th><input onclick="selectAll()" type="checkbox"   name="controlAll" style="controlAll" id="controlAll"/>是否修改 </th>
@@ -36,10 +36,14 @@
 	<!-- 此处可遍历 List<CorrelationUPT>-->
 	<c:forEach items="${correlationuptList}" var="correlationuptList" varStatus="co">
 	<tr>
-		<td align="left"><input type="checkbox" name="checkbox" value='${correlationuptList.correlationid}'/></td>
+		<td align="left">
+			<input type="checkbox" name="checkbox" value='${correlationuptList.correlationid}'/>
+		 	<input type="hidden" name="permissionid" value='${correlationuptList.permissionid}'/>
+		</td>
 		<td align="center">
 			<!-- <input type="text" value="${table.tablename}"/> -->
-			<input type="text" name="tablename" value='${correlationuptList.table.tablename}'/>
+			<input type="text" name="tablename" value='${correlationuptList.table.tablename}' readonly="readonly"/>
+			<input type="hidden" name="tableid" value='${correlationuptList.table.tableid}'/>
 		</td>
 		<td align="center">
 			<select name="selectadd" id="add">
@@ -129,19 +133,19 @@ function addRow() {
     var newNameTD = newTR.insertCell(0);
     newNameTD.innerHTML = "<input type='checkbox' name='checkbox'/>";
     var newNameTD = newTR.insertCell(1);
-    newNameTD.innerHTML = "<input name='tablename+"rows"+' id='tablename' type='text' />";
+    newNameTD.innerHTML = "<input name='newtablename' id='tablename' type='text' />";
     var newNameTD = newTR.insertCell(2);
-    newNameTD.innerHTML = "<select name='selectadd+"rows"+' id='add'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
+    newNameTD.innerHTML = "<select name='newselectadd' id='add'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
     var newNameTD = newTR.insertCell(2);
-    newNameTD.innerHTML = "<select name='selectdelete+"rows"+' id='delete'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
+    newNameTD.innerHTML = "<select name='newselectdelete' id='delete'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
     var newNameTD = newTR.insertCell(2);
-    newNameTD.innerHTML = "<select name='selectupdate+"rows"+' id='update'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
+    newNameTD.innerHTML = "<select name='newselectupdate' id='update'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
     var newNameTD = newTR.insertCell(2);
-    newNameTD.innerHTML = "<select name='selectsearch+"rows"+' id='search'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
+    newNameTD.innerHTML = "<select name='newselectsearch' id='search'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
     var newNameTD = newTR.insertCell(2);
-    newNameTD.innerHTML = "<select name='selectexport+"rows"+' id='export'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
+    newNameTD.innerHTML = "<select name='newselectexport' id='export'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
     var newNameTD = newTR.insertCell(2);
-    newNameTD.innerHTML = "<select name='selectcheck+"rows"+' id='check'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
+    newNameTD.innerHTML = "<select name='newselectcheck' id='check'><option>请选择</option><option value='yes' >有权限</option><option value='no'>无权限</option>";
 }
 
 function selectAll(){

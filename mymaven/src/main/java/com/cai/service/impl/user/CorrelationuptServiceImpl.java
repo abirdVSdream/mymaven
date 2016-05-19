@@ -56,7 +56,34 @@ public class CorrelationuptServiceImpl implements CorrelationuptService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	/*
+	 * 更新相应的表的权限
+	 * 
+	 */
+	public int updateByPermissionAndTable(List<Correlationupt> record) throws Exception
+	{
+		for(Correlationupt correlationupt :record)
+		{
+			if(!(correlationupt.getPermission().getPermissionid().equals(null)||correlationupt.getPermission().getPermissionid().equals("")))
+			{
+				//更新权限表
+				this.permissiondao.updateByPrimaryKey(correlationupt.getPermission());
+			}else
+			{
+				//插入权限数据
+				this.permissiondao.insert(correlationupt.getPermission());
+				//
+				
+			}
+		}
+		return 0;
+	}
+	
+/*
+ * 根据用户id查找对应表的权限
+ * 
+ */
 	public List<Correlationupt> selectByUserid(String userid) throws Exception {
 		// TODO Auto-generated method stub
 		

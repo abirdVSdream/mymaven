@@ -78,11 +78,62 @@ public class CorrelationuptController
 	@RequestMapping("/update.html")
 	public String update(HttpServletRequest request,Model model) throws Exception
 	{
-		String [] useri = request.getParameterValues("select");
-		for(int i=0;i<useri.length;i++)
+		
+		String [] tableid = request.getParameterValues("tableid");
+		String [] permissionid = request.getParameterValues("permissionid");
+		String [] selectadd = request.getParameterValues("selectadd");
+		String [] selectdelete = request.getParameterValues("selectdelete");
+		String [] selectupdate = request.getParameterValues("selectupdate");
+		String [] selectsearch = request.getParameterValues("selectsearch");
+		String [] selectexport =request.getParameterValues("selectexport");
+		String [] selectcheck = request.getParameterValues("selectcheck");
+		
+		List<Correlationupt> correlationuptList = new ArrayList<Correlationupt>();
+		for(int i=0; i<permissionid.length;i++)
 		{
-			System.out.println(useri[i]);
+			Permission permission  = new Permission();
+			Correlationupt correlationupt = new Correlationupt();
+			permission.setPermissionid(permissionid[i]);
+			permission.setAdd(selectadd[i]);
+			permission.setDelete(selectdelete[i]);
+			permission.setUpdate(selectupdate[i]);
+			permission.setSearch(selectsearch[i]);
+			permission.setExport(selectexport[i]);
+			permission.setCheck(selectcheck[i]);
+			correlationupt.setPermission(permission);
+			correlationuptList.add(correlationupt);
 		}
+		
+		String [] newtablename = request.getParameterValues("newtablename");
+		String [] newselectadd = request.getParameterValues("newselectadd");
+		String [] newselectdelete = request.getParameterValues("newselectdelete");
+		String [] newselectupdate = request.getParameterValues("newselectupdate");
+		String [] newselectsearch = request.getParameterValues("newselectsearch");
+		String [] newselectexport =request.getParameterValues("newselectexport");
+		String [] newselectcheck = request.getParameterValues("newselectcheck");
+		
+		for(int i=0; i<newselectadd.length;i++)
+		{
+			if(newtablename[i].equals(null)||newtablename[i].equals(""))
+			{
+				continue;
+			}
+			Permission permission  = new Permission();
+			Table table = new Table();
+			Correlationupt correlationupt = new Correlationupt();
+			table.setTablename(newtablename[i]);
+			permission.setAdd(newselectadd[i]);
+			permission.setDelete(newselectdelete[i]);
+			permission.setUpdate(newselectupdate[i]);
+			permission.setSearch(newselectsearch[i]);
+			permission.setExport(newselectexport[i]);
+			permission.setCheck(newselectcheck[i]);
+			correlationupt.setPermission(permission);
+			correlationupt.setTable(table);
+			correlationuptList.add(correlationupt);
+		}
+		
+		this.correlationuptService.updateByPermissionAndTable(correlationuptList);
 		
 		model.addAttribute("succ", "修改成功");
 		return "/config/user/user_permission";
