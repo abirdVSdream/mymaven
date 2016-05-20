@@ -125,8 +125,27 @@ public class CorrelationuptServiceImpl implements CorrelationuptService {
 	 */
 	public List<Correlationupt> selectByTablename(String tablename) throws Exception
 	{
-		return null;
+		List<Correlationupt> correlationuptList = new ArrayList<Correlationupt>(); 
+		Table tabl = this.tabledao.selectByTablename(tablename);
+		if(tabl == null)
+		{
+			return null;
+		}
 		
+		Correlationupt correlationupt = this.correlationuptdao.selectByTableid(tabl.getTableid());
+		
+		if(correlationupt == null)
+		{
+			return null;
+		}
+		correlationupt.setTable(tabl);
+		if(correlationupt.getPermissionid()!=null || !(correlationupt.getPermissionid().equals("")))
+		{
+			Permission permission =this.permissiondao.selectByPrimaryKey(correlationupt.getPermissionid());
+			correlationupt.setPermission(permission);
+		}
+		correlationuptList.add(correlationupt);
+		return correlationuptList;
 	}
 	
 	

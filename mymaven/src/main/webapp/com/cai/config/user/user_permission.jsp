@@ -17,7 +17,9 @@
 </div>
 <div align="center">
 	<form action="${rootPath}/config/user/selectByTablename.html">
-		<input name="tablenamefind" type="text"/><input type="submit" value="权限表"/>
+		<input name="tablenamefind" type="text"/>
+		<input type="hidden" name="userid" value="${user.userid}"/>
+		<input type="submit" value="权限表"/>
 	</form>
 </div>
 

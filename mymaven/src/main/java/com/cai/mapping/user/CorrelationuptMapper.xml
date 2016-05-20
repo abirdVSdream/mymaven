@@ -24,6 +24,14 @@
     where userid = #{userid,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByTableid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from correlationupt
+    where tableid = #{tableid,jdbcType=VARCHAR}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from correlationupt
     where correlationid = #{correlationid,jdbcType=VARCHAR}

@@ -13,6 +13,8 @@ public interface CorrelationuptMapper {
 
     Correlationupt selectByPrimaryKey(String correlationid);
     
+    Correlationupt selectByTableid(String tableid);
+    
     List<Correlationupt> selectByUserid(String userid);
     
     int updateByPrimaryKeySelective(Correlationupt record);
