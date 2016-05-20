@@ -11,7 +11,7 @@
 
 <h3 align="center">用户管理</h3>
 <div align="center">
-<form action="${rootPath}/user.html">
+<form action="${rootPath}/user/user.html">
 <input type="text" name="userid"/>
 <input type="submit" value="查询用户"/>
 </form>
@@ -27,7 +27,7 @@
 	<tr>
 		<td align="center"><input type="text" value="${user.userid}" readonly="readonly"/></td>
 		<td align="center"><input type="text" value="${user.username}" readonly="readonly"/></td>
-		<td align="center"><a href="${rootPath}/permission.html?userid=${user.userid}">用户权限管理</a></td>
+		<td align="center"><a href="${rootPath}/config/user/permission.html?userid=${user.userid}">用户权限管理</a></td>
 	</tr>
 </table>
 </div>

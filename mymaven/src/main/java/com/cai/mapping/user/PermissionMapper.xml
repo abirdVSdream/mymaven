@@ -3,18 +3,20 @@
 <mapper namespace="com.cai.dao.user.PermissionMapper" >
   <resultMap id="BaseResultMap" type="com.cai.pojo.user.Permission" >
     <id column="permissionid" property="permissionid" jdbcType="VARCHAR" />
-    <result column="add" property="add" jdbcType="VARCHAR" />
-    <result column="delete" property="delete" jdbcType="VARCHAR" />
-    <result column="update" property="update" jdbcType="VARCHAR" />
+    <result column="append" property="append" jdbcType="VARCHAR" />
+    <result column="del" property="del" jdbcType="VARCHAR" />
+    <result column="upd" property="upd" jdbcType="VARCHAR" />
     <result column="search" property="search" jdbcType="VARCHAR" />
-    <result column="export" property="export" jdbcType="VARCHAR" />
-    <result column="check" property="check" jdbcType="VARCHAR" />
+    <result column="exp" property="exp" jdbcType="VARCHAR" />
+    <result column="che" property="che" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    permissionid, add, delete, update, search, export, check
+    permissionid, append, del, upd, search, exp, che
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select * from permission
+    select 
+    <include refid="Base_Column_List" />
+    from permission
     where permissionid = #{permissionid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
@@ -22,12 +24,12 @@
     where permissionid = #{permissionid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cai.pojo.user.Permission" >
-    insert into permission (permissionid, add, delete, 
-      update, search, export, 
-      check)
-    values (#{permissionid,jdbcType=VARCHAR}, #{add,jdbcType=VARCHAR}, #{delete,jdbcType=VARCHAR}, 
-      #{update,jdbcType=VARCHAR}, #{search,jdbcType=VARCHAR}, #{export,jdbcType=VARCHAR}, 
-      #{check,jdbcType=VARCHAR})
+    insert into permission (permissionid, append, del, 
+      upd, search, exp, che
+      )
+    values (#{permissionid,jdbcType=VARCHAR}, #{append,jdbcType=VARCHAR}, #{del,jdbcType=VARCHAR}, 
+      #{upd,jdbcType=VARCHAR}, #{search,jdbcType=VARCHAR}, #{exp,jdbcType=VARCHAR}, #{che,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cai.pojo.user.Permission" >
     insert into permission
@@ -35,81 +37,81 @@
       <if test="permissionid != null" >
         permissionid,
       </if>
-      <if test="add != null" >
-        add,
+      <if test="append != null" >
+        append,
       </if>
-      <if test="delete != null" >
-        delete,
+      <if test="del != null" >
+        del,
       </if>
-      <if test="update != null" >
-        update,
+      <if test="upd != null" >
+        upd,
       </if>
       <if test="search != null" >
         search,
       </if>
-      <if test="export != null" >
-        export,
+      <if test="exp != null" >
+        exp,
       </if>
-      <if test="check != null" >
-        check,
+      <if test="che != null" >
+        che,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="permissionid != null" >
         #{permissionid,jdbcType=VARCHAR},
       </if>
-      <if test="add != null" >
-        #{add,jdbcType=VARCHAR},
+      <if test="append != null" >
+        #{append,jdbcType=VARCHAR},
       </if>
-      <if test="delete != null" >
-        #{delete,jdbcType=VARCHAR},
+      <if test="del != null" >
+        #{del,jdbcType=VARCHAR},
       </if>
-      <if test="update != null" >
-        #{update,jdbcType=VARCHAR},
+      <if test="upd != null" >
+        #{upd,jdbcType=VARCHAR},
       </if>
       <if test="search != null" >
         #{search,jdbcType=VARCHAR},
       </if>
-      <if test="export != null" >
-        #{export,jdbcType=VARCHAR},
+      <if test="exp != null" >
+        #{exp,jdbcType=VARCHAR},
       </if>
-      <if test="check != null" >
-        #{check,jdbcType=VARCHAR},
+      <if test="che != null" >
+        #{che,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.user.Permission" >
     update permission
     <set >
-      <if test="add != null" >
-        add = #{add,jdbcType=VARCHAR},
+      <if test="append != null" >
+        append = #{append,jdbcType=VARCHAR},
       </if>
-      <if test="delete != null" >
-        delete = #{delete,jdbcType=VARCHAR},
+      <if test="del != null" >
+        del = #{del,jdbcType=VARCHAR},
       </if>
-      <if test="update != null" >
-        update = #{update,jdbcType=VARCHAR},
+      <if test="upd != null" >
+        upd = #{upd,jdbcType=VARCHAR},
       </if>
       <if test="search != null" >
         search = #{search,jdbcType=VARCHAR},
       </if>
-      <if test="export != null" >
-        export = #{export,jdbcType=VARCHAR},
+      <if test="exp != null" >
+        exp = #{exp,jdbcType=VARCHAR},
       </if>
-      <if test="check != null" >
-        check = #{check,jdbcType=VARCHAR},
+      <if test="che != null" >
+        che = #{che,jdbcType=VARCHAR},
       </if>
     </set>
     where permissionid = #{permissionid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cai.pojo.user.Permission" >
     update permission
-    set add = #{add,jdbcType=VARCHAR},
-      delete = #{delete,jdbcType=VARCHAR},
-      update = #{update,jdbcType=VARCHAR},
+    set append = #{append,jdbcType=VARCHAR},
+      del = #{del,jdbcType=VARCHAR},
+      upd = #{upd,jdbcType=VARCHAR},
       search = #{search,jdbcType=VARCHAR},
-      export = #{export,jdbcType=VARCHAR},
-      check = #{check,jdbcType=VARCHAR}
+      exp = #{exp,jdbcType=VARCHAR},
+      che = #{che,jdbcType=VARCHAR}
     where permissionid = #{permissionid,jdbcType=VARCHAR}
   </update>
 </mapper>

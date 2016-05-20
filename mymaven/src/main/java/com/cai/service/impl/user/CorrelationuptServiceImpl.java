@@ -63,21 +63,37 @@ public class CorrelationuptServiceImpl implements CorrelationuptService {
 	 */
 	public int updateByPermissionAndTable(List<Correlationupt> record) throws Exception
 	{
-		for(Correlationupt correlationupt :record)
+		for(Correlationupt correlationupt : record)
 		{
-			if(!(correlationupt.getPermission().getPermissionid().equals(null)||correlationupt.getPermission().getPermissionid().equals("")))
+			if(!(correlationupt.getPermission().getPermissionid() == null ||correlationupt.getPermission().getPermissionid().equals("")))
 			{
 				//更新权限表
 				this.permissiondao.updateByPrimaryKey(correlationupt.getPermission());
 			}else
 			{
+				//以tablename 查找相应的table
+				String tablename = correlationupt.getTable().getTablename();
+				Table tabl = this.tabledao.selectByTablename(tablename);
+				if(tabl == null)
+				{
+					continue;
+				}
+				if(tabl.getTableid() == null || tabl.getTableid().equals(""))
+				{
+					continue;
+				}
+				String permissionid = tablename+correlationupt.getPermission().getAppend();
+				correlationupt.getPermission().setPermissionid(permissionid);
 				//插入权限数据
 				this.permissiondao.insert(correlationupt.getPermission());
-				//
-				
+				correlationupt.setTableid(tabl.getTableid());
+				correlationupt.setPermissionid(permissionid);
+				correlationupt.setCorrelationid(tabl.getTableid()+permissionid);
+				//插入关联表
+				this.correlationuptdao.insert(correlationupt);
 			}
 		}
-		return 0;
+		return 1;
 	}
 	
 /*
@@ -103,6 +119,16 @@ public class CorrelationuptServiceImpl implements CorrelationuptService {
 		
 		return correlationuptList;
 	}
+	
+	/*
+	 * 根据tablename查找相应的关联权限
+	 */
+	public List<Correlationupt> selectByTablename(String tablename) throws Exception
+	{
+		return null;
+		
+	}
+	
 	
 //	public static void main(String args[])
 //	{

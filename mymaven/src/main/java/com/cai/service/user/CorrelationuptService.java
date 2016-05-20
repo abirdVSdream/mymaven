@@ -16,6 +16,8 @@ public interface CorrelationuptService
 		public Correlationupt selectByPrimaryKey(String correlationid) throws Exception;
 		
 		public List<Correlationupt> selectByUserid(String userid) throws Exception;
+		
+		public List<Correlationupt> selectByTablename(String tablename) throws Exception;
 
 		public int updateByPrimaryKeySelective(Correlationupt record) throws Exception;
 

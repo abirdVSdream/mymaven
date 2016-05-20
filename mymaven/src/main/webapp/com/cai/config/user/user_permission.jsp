@@ -9,18 +9,20 @@
 <title>用户权限管理</title>
 </head>
 <body>
+<!--<c:out value="${user.userid}"></c:out>-->
 <div><p>${succ}</p></div>
 <h3 align="center">用户权限管理</h3>
 <div align="center">
 	用户名：<input type="text" name="username" value="${user.username}" readonly="readonly"/>
-		<input type="hidden" name="userid" value="${user.userid}" />
 </div>
 <div align="center">
-	<input type="text"/><input type="submit" value="权限表"/>
+	<form action="${rootPath}/config/user/selectByTablename.html">
+		<input name="tablenamefind" type="text"/><input type="submit" value="权限表"/>
+	</form>
 </div>
 
 <div align="center">
-<form action="${rootPath}/update.html">
+<form action="${rootPath}/config/user/update.html">
 <table border="1" id="table">
 	<tr>
 	<th><input onclick="selectAll()" type="checkbox"   name="controlAll" style="controlAll" id="controlAll"/>是否修改 </th>
@@ -39,6 +41,7 @@
 		<td align="left">
 			<input type="checkbox" name="checkbox" value='${correlationuptList.correlationid}'/>
 		 	<input type="hidden" name="permissionid" value='${correlationuptList.permissionid}'/>
+		 	<input type="hidden" name="userid" value="${user.userid}"/>
 		</td>
 		<td align="center">
 			<!-- <input type="text" value="${table.tablename}"/> -->
@@ -47,11 +50,11 @@
 		</td>
 		<td align="center">
 			<select name="selectadd" id="add">
-				<c:if test='${correlationuptList.permission.add == "yes"}'>
+				<c:if test='${correlationuptList.permission.append == "yes"}'>
 					<option value="yes" selected="selected">有权限</option>
 					<option value="no">无权限</option>
 				</c:if>
-				<c:if test='${correlationuptList.permission.add == "no"}'>
+				<c:if test='${correlationuptList.permission.append == "no"}'>
 					<option value="yes" >有权限</option>
 					<option value="no" selected="selected">无权限</option>
 				</c:if>	
@@ -59,11 +62,11 @@
 		</td>
 		<td align="center">
 			<select name="selectdelete" id="delete">
-			<c:if test='${correlationuptList.permission.delete == "yes"}'>
+			<c:if test='${correlationuptList.permission.del == "yes"}'>
 				<option value="yes" selected="selected">有权限</option>
 				<option value="no">无权限</option>
 			</c:if>
-			<c:if test='${correlationuptList.permission.delete == "no"}'>
+			<c:if test='${correlationuptList.permission.del == "no"}'>
 				<option value="yes" >有权限</option>
 				<option value="no" selected="selected">无权限</option>
 			</c:if>	
@@ -71,11 +74,11 @@
 		</td>
 		<td align="center">
 			<select name="selectupdate" id="update">
-				<c:if test='${correlationuptList.permission.update == "yes"}'>
+				<c:if test='${correlationuptList.permission.upd == "yes"}'>
 					<option value="yes" selected="selected">有权限</option>
 					<option value="no">无权限</option>
 				</c:if>
-				<c:if test='${correlationuptList.permission.update == "no"}'>
+				<c:if test='${correlationuptList.permission.upd == "no"}'>
 					<option value="yes" >有权限</option>
 					<option value="no" selected="selected">无权限</option>
 				</c:if>	
@@ -95,11 +98,11 @@
 		</td>
 		<td align="center">
 			<select name="selectexport" id="export">
-				<c:if test='${correlationuptList.permission.export == "yes"}'>
+				<c:if test='${correlationuptList.permission.exp == "yes"}'>
 					<option value="yes" selected="selected">有权限</option>
 					<option value="no">无权限</option>
 				</c:if>
-				<c:if test='${correlationuptList.permission.export == "no"}'>
+				<c:if test='${correlationuptList.permission.exp == "no"}'>
 					<option value="yes" >有权限</option>
 					<option value="no" selected="selected">无权限</option>
 				</c:if>	
@@ -107,11 +110,11 @@
 		</td>
 		<td align="center">
 			<select name="selectcheck" id="check">
-				<c:if test='${correlationuptList.permission.check == "yes"}'>
+				<c:if test='${correlationuptList.permission.che == "yes"}'>
 					<option value="yes" selected="selected">有权限</option>
 					<option value="no">无权限</option>
 				</c:if>
-				<c:if test='${correlationuptList.permission.check == "no"}'>
+				<c:if test='${correlationuptList.permission.che == "no"}'>
 					<option value="yes" >有权限</option>
 					<option value="no" selected="selected">无权限</option>
 				</c:if>	
@@ -131,7 +134,7 @@ function addRow() {
     var newTR = document.getElementById("table").insertRow(document.getElementById("table").rows.length);
     var rows = (document.getElementById("table").rows.length)+1;
     var newNameTD = newTR.insertCell(0);
-    newNameTD.innerHTML = "<input type='checkbox' name='checkbox'/>";
+    newNameTD.innerHTML = "<input type='checkbox' name='checkbox'/><input type='hidden' name='userid' value='${user.userid}'/><input type='hidden' name='index' value='index'/>";
     var newNameTD = newTR.insertCell(1);
     newNameTD.innerHTML = "<input name='newtablename' id='tablename' type='text' />";
     var newNameTD = newTR.insertCell(2);
@@ -178,6 +181,5 @@ function deletes()
 }
 
 </script>
-
 </body>
 </html>

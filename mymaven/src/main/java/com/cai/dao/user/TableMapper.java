@@ -10,8 +10,10 @@ public interface TableMapper {
     int insertSelective(Table record);
 
     Table selectByPrimaryKey(String tableid);
-
-    int updateByPrimaryKeySelective(Table record);
+    
+    Table selectByTablename(String tableid);
+    
+    int updateByPrimaryKeySelective(Table tablename);
 
     int updateByPrimaryKey(Table record);
 }

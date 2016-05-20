@@ -1,21 +1,19 @@
 package com.cai.pojo.user;
-//权限类
-public class Permission {
-    //关联id
-	private String permissionid;
 
-    //增加权限
-  	private String add;
-  	//删除权限
-  	private String delete;
-  	//更新权限
-  	private String update;
-  	//查找权限
-  	private String search;
-  	//导出数据权限
-  	private String export;
-  	//审核权限
-  	private String check;
+public class Permission {
+    private String permissionid;
+
+    private String append;
+
+    private String del;
+
+    private String upd;
+
+    private String search;
+
+    private String exp;
+
+    private String che;
 
     public String getPermissionid() {
         return permissionid;
@@ -25,28 +23,28 @@ public class Permission {
         this.permissionid = permissionid == null ? null : permissionid.trim();
     }
 
-    public String getAdd() {
-        return add;
+    public String getAppend() {
+        return append;
     }
 
-    public void setAdd(String add) {
-        this.add = add == null ? null : add.trim();
+    public void setAppend(String append) {
+        this.append = append == null ? null : append.trim();
     }
 
-    public String getDelete() {
-        return delete;
+    public String getDel() {
+        return del;
     }
 
-    public void setDelete(String delete) {
-        this.delete = delete == null ? null : delete.trim();
+    public void setDel(String del) {
+        this.del = del == null ? null : del.trim();
     }
 
-    public String getUpdate() {
-        return update;
+    public String getUpd() {
+        return upd;
     }
 
-    public void setUpdate(String update) {
-        this.update = update == null ? null : update.trim();
+    public void setUpd(String upd) {
+        this.upd = upd == null ? null : upd.trim();
     }
 
     public String getSearch() {
@@ -57,19 +55,19 @@ public class Permission {
         this.search = search == null ? null : search.trim();
     }
 
-    public String getExport() {
-        return export;
+    public String getExp() {
+        return exp;
     }
 
-    public void setExport(String export) {
-        this.export = export == null ? null : export.trim();
+    public void setExp(String exp) {
+        this.exp = exp == null ? null : exp.trim();
     }
 
-    public String getCheck() {
-        return check;
+    public String getChe() {
+        return che;
     }
 
-    public void setCheck(String check) {
-        this.check = check == null ? null : check.trim();
+    public void setChe(String che) {
+        this.che = che == null ? null : che.trim();
     }
 }

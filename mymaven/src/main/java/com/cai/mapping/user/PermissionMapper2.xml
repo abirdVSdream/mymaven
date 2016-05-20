@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cai.dao.user.PermissionMapper2" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.user.Permission2" >
+    <id column="permissionid" property="permissionid" jdbcType="VARCHAR" />
+    <result column="add" property="add" jdbcType="VARCHAR" />
+    <result column="delete" property="delete" jdbcType="VARCHAR" />
+    <result column="update" property="update" jdbcType="VARCHAR" />
+    <result column="search" property="search" jdbcType="VARCHAR" />
+    <result column="export" property="export" jdbcType="VARCHAR" />
+    <result column="check" property="check" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    permissionid, add, delete, update, search, export, check
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from permission
+    where permissionid = #{permissionid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from permission
+    where permissionid = #{permissionid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cai.pojo.user.Permission2" >
+    insert into permission (permissionid, add, delete, 
+      update, search, export, 
+      check)
+    values (#{permissionid,jdbcType=VARCHAR}, #{add,jdbcType=VARCHAR}, #{delete,jdbcType=VARCHAR}, 
+      #{update,jdbcType=VARCHAR}, #{search,jdbcType=VARCHAR}, #{export,jdbcType=VARCHAR}, 
+      #{check,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cai.pojo.user.Permission2" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionid != null" >
+        permissionid,
+      </if>
+      <if test="add != null" >
+        add,
+      </if>
+      <if test="delete != null" >
+        delete,
+      </if>
+      <if test="update != null" >
+        update,
+      </if>
+      <if test="search != null" >
+        search,
+      </if>
+      <if test="export != null" >
+        export,
+      </if>
+      <if test="check != null" >
+        check,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionid != null" >
+        #{permissionid,jdbcType=VARCHAR},
+      </if>
+      <if test="add != null" >
+        #{add,jdbcType=VARCHAR},
+      </if>
+      <if test="delete != null" >
+        #{delete,jdbcType=VARCHAR},
+      </if>
+      <if test="update != null" >
+        #{update,jdbcType=VARCHAR},
+      </if>
+      <if test="search != null" >
+        #{search,jdbcType=VARCHAR},
+      </if>
+      <if test="export != null" >
+        #{export,jdbcType=VARCHAR},
+      </if>
+      <if test="check != null" >
+        #{check,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.user.Permission2" >
+    update permission
+    <set >
+      <if test="add != null" >
+        add = #{add,jdbcType=VARCHAR},
+      </if>
+      <if test="delete != null" >
+        delete = #{delete,jdbcType=VARCHAR},
+      </if>
+      <if test="update != null" >
+        update = #{update,jdbcType=VARCHAR},
+      </if>
+      <if test="search != null" >
+        search = #{search,jdbcType=VARCHAR},
+      </if>
+      <if test="export != null" >
+        export = #{export,jdbcType=VARCHAR},
+      </if>
+      <if test="check != null" >
+        check = #{check,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where permissionid = #{permissionid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.user.Permission2" >
+    update permission
+    set add = #{add,jdbcType=VARCHAR},
+      delete = #{delete,jdbcType=VARCHAR},
+      update = #{update,jdbcType=VARCHAR},
+      search = #{search,jdbcType=VARCHAR},
+      export = #{export,jdbcType=VARCHAR},
+      check = #{check,jdbcType=VARCHAR}
+    where permissionid = #{permissionid,jdbcType=VARCHAR}
+  </update>
+</mapper>

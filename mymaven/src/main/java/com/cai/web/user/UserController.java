@@ -39,7 +39,7 @@ public class UserController
 //		
 //	}
 	
-	@RequestMapping("/user.html")
+	@RequestMapping("/user/user.html")
 	public String toIndex(HttpServletRequest request,Model model) throws Exception
 	{
 		String userid = request.getParameter("userid"); 
