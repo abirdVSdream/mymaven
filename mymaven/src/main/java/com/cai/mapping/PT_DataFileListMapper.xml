@@ -16,12 +16,26 @@
     select 
     <include refid="Base_Column_List" />
     from pt_data_field_list
-    where HANDLE = #{handle,jdbcType=VARCHAR}
+    where HANDLE = #{ptDataFieldBo,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectBydatafiledbo" resultType="java.util.HashMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pt_data_field_list
+    where PT_DATA_FIELD_BO = #{handle,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from pt_data_field_list
     where HANDLE = #{handle,jdbcType=VARCHAR}
   </delete>
+  
+  <delete id="deleteByptDataFieldBo" parameterType="java.lang.String" >
+    delete from pt_data_field_list
+    where PT_DATA_FIELD_BO = #{ptDataFieldBo,jdbcType=VARCHAR}
+  </delete>
+  
   <insert id="insert" parameterType="com.cai.pojo.PT_DataFileList" >
     insert into pt_data_field_list (HANDLE, PT_DATA_FIELD_BO, SEQUENCE, 
       DATA_VALUE, DATA_TAG, IS_DEFAULT

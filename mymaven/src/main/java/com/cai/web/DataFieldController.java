@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cai.pojo.PT_DataField;
+import com.cai.pojo.PT_DataFileList;
 import com.cai.service.DataFieldService;
 import com.cai.web.base.BaseController;
 
@@ -106,72 +107,67 @@ public class DataFieldController extends BaseController
 	//新增页面
 	@RequestMapping(value = "/config/datafield/saveDataField.html")
 	public void saveDataField(HttpServletRequest request,HttpServletResponse response) {
-//		try {
-//			request.setCharacterEncoding("UTF-8");
-//			response.setCharacterEncoding("UTF-8");
-//			
-//			PtDataFieldBean  ptdatafieldbean =  new PtDataFieldBean();
-//			String dataStr = request.getParameter("DATA");
-//			JSONObject jsonObj = JSONObject.fromObject(dataStr);
-//								
-//			String data_field = jsonObj.optString("DATA_FIELD");
-//			String description = jsonObj.optString("DESCRIPTION");
-//			String data_tag = jsonObj.optString("DATA_TAG");
-//			String mark_group = jsonObj.optString("PT_MASK_GROUP_BO");
-//			String field_type = jsonObj.optString("FIELD_TYPE");
-//			String field_unit = jsonObj.optString("FIELD_UNIT");
-//			String value_one = jsonObj.optString("BOOLEAN_ONE_VALUE");
-//			String value_zone = jsonObj.optString("BOOLEAN_ZERO_VALUE");
-//			
-//			ptdatafieldbean.setPlant(this.getPlant(request));
-//			ptdatafieldbean.setDataField(data_field);
-//			ptdatafieldbean.setDescription(description);
-//			ptdatafieldbean.setDataTag(data_tag);
-//			
-//			PtMaskGroupBean maskGroupBo = new PtMaskGroupBean();
-//			maskGroupBo.setCompany(this.getCompany(request));
-//			maskGroupBo.setPlant(this.getPlant(request));
-//			maskGroupBo.setMaskGroup(mark_group);
-//			
-//			ptdatafieldbean.setPtMaskGroupBo(maskGroupBo);	
-//			ptdatafieldbean.setFieldType(field_type);
-//			ptdatafieldbean.setFieldUnit(field_unit);
-//			ptdatafieldbean.setBooleanOneValue(value_one);
-//			ptdatafieldbean.setBooleanZeroValue(value_zone);
-//			ptdatafieldbean.setCompany(this.getCompany(request));
-//			ptdatafieldbean.setCreateUserBo(this.getUserBo(request));
-//			
-//			List<PtDataFieldValueBean> valueList=new ArrayList<PtDataFieldValueBean>();
-//			JSONArray jsonArray = jsonObj.optJSONArray("TABLE_DATA");
-//			for (int i = 0; i < jsonArray.size(); i++) {
-//				PtDataFieldValueBean datafieldvaluebean= ptdatafieldbean.new PtDataFieldValueBean();
-//				JSONObject _jsonObj = jsonArray.getJSONObject(i);
-//				
-//				String sequence = _jsonObj.optString("sequence");
-//				String data_value = _jsonObj.optString("data_value");
-//				String data_tag1 = _jsonObj.optString("data_tag");
-//				String is_default = _jsonObj.optString("is_default");
-//			
-//				datafieldvaluebean.setSequence(sequence);
-//				datafieldvaluebean.setDataValue(data_value);
-//				datafieldvaluebean.setDataTag(data_tag1);
-//				datafieldvaluebean.setIsDefault(is_default);
-//				valueList.add(datafieldvaluebean);
-//			}
-//			
-//			ptdatafieldbean.setDataFieldValueList(valueList);
-//			dataFieldService.insert(ptdatafieldbean);
+		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+		
+			PT_DataField  ptdatafieldbean =  new PT_DataField();
+			String dataStr = request.getParameter("DATA");
+			JSONObject jsonObj = JSONObject.fromObject(dataStr);
+								
+			String data_field = jsonObj.optString("DATA_FIELD");
+			String description = jsonObj.optString("DESCRIPTION");
+			String data_tag = jsonObj.optString("DATA_TAG");
+			String ptMaskGroupBo = jsonObj.optString("PT_MASK_GROUP_BO");
+			String field_type = jsonObj.optString("FIELD_TYPE");
+			String field_unit = jsonObj.optString("FIELD_UNIT");
+			String value_one = jsonObj.optString("BOOLEAN_ONE_VALUE");
+			String value_zone = jsonObj.optString("BOOLEAN_ZERO_VALUE");
+			
+			
+			ptdatafieldbean.setSequence(1001+data_field);
+			ptdatafieldbean.setDataField(data_field);
+			ptdatafieldbean.setDescription(description);
+			ptdatafieldbean.setDataTag(data_tag);
+			
+			
+			ptdatafieldbean.setFieldType(field_type);
+			ptdatafieldbean.setFieldUnit(field_unit);
+			ptdatafieldbean.setBooleanOneValue(value_one);
+			ptdatafieldbean.setBooleanZeroValue(value_zone);
+			ptdatafieldbean.setPtMaskGroupBo(ptMaskGroupBo);
+			
+			List<PT_DataFileList> valueList=new ArrayList<PT_DataFileList>();
+			JSONArray jsonArray = jsonObj.optJSONArray("TABLE_DATA");
+			for (int i = 0; i < jsonArray.size(); i++) {
+				PT_DataFileList datafieldvaluebean= new PT_DataFileList();
+				JSONObject _jsonObj = jsonArray.getJSONObject(i);
+				
+				String sequence = _jsonObj.optString("sequence");
+				String data_value = _jsonObj.optString("data_value");
+				String data_tag1 = _jsonObj.optString("data_tag");
+				String is_default = _jsonObj.optString("is_default");
+				
+				datafieldvaluebean.setHandle(data_field+sequence);
+				datafieldvaluebean.setPtDataFieldBo(data_field);
+				datafieldvaluebean.setSequence(sequence);
+				datafieldvaluebean.setDataValue(data_value);
+				datafieldvaluebean.setDataTag(data_tag1);
+				datafieldvaluebean.setIsDefault(is_default);
+				valueList.add(datafieldvaluebean);
+			}
+			
+			ptdatafieldbean.setDataFieldValueList(valueList);
+			dataFieldService.insert(ptdatafieldbean);
 			
 			outPrintJsonRight(request, response, "新增成功");
-//		} catch (Exception e) {
-//			outPrintJsonException(request, response, e);
-//		}
+		} catch (Exception e) {
+			outPrintJsonException(request, response, e);
+		}
 	}
 	
-	//查看页面
-	
 	/*
-	 * 修改中
+	 * 查看页面
 	 */
 	@RequestMapping(value = "/config/datafield/selectDataField.html")
 	public void selectDataField(HttpServletRequest request,
@@ -184,13 +180,6 @@ public class DataFieldController extends BaseController
 			JSONObject jsonObj = JSONObject.fromObject(dataStr);
 
 			String datafield = jsonObj.optString("DATA_FIELD");
-//			String description = jsonObj.optString("DESCRIPTION");
-//			String data_tag = jsonObj.optString("DATA_TAG");
-//			String mark_group = jsonObj.optString("pt_mask_group_bo");
-//			String field_type = jsonObj.optString("FIELD_TYPE");
-//			String field_unit = jsonObj.optString("FIELD_UNIT");
-//			String value_one = jsonObj.optString("value_1");
-//			String value_zone = jsonObj.optString("value_1");
 				
 			List<Map<String, Object>> result = dataFieldService.retrieve(datafield);
 			outPrintJsonText(request, response, result);
@@ -204,87 +193,70 @@ public class DataFieldController extends BaseController
 	@RequestMapping(value = "/config/datafield/updateDataField.html")
 	public void updateDataField(HttpServletRequest request,
 			HttpServletResponse response) {
-//		try {
-//			request.setCharacterEncoding("UTF-8");
-//			response.setCharacterEncoding("UTF-8");
-//			
-//			PtDataFieldBean ptDataFieldBean = new PtDataFieldBean();
-//			String dataStr = request.getParameter("DATA");
-//			JSONObject jsonObj = JSONObject.fromObject(dataStr);
-//			String data_field = jsonObj.optString("DATA_FIELD");
-//			String description = jsonObj.optString("DESCRIPTION");
-//			String mark_group = jsonObj.optString("PT_MASK_GROUP_BO");
-//			String data_tag = jsonObj.optString("DATA_TAG");
-//			String field_type = jsonObj.optString("FIELD_TYPE");
-//			String field_unit = jsonObj.optString("FIELD_UNIT");
-//			
-//			PtMaskGroupBean maskGroupBo = new PtMaskGroupBean();
-//			maskGroupBo.setCompany(this.getCompany(request));
-//			maskGroupBo.setPlant(this.getPlant(request));
-//			maskGroupBo.setMaskGroup(mark_group);
-//			
-//			ptDataFieldBean.setPtMaskGroupBo(maskGroupBo);	
-//			ptDataFieldBean.setPlant(this.getPlant(request));
-//			ptDataFieldBean.setCompany(this.getCompany(request));
-//			ptDataFieldBean.setDataField(data_field);
-//			ptDataFieldBean.setDescription(description);
-//			ptDataFieldBean.setDataTag(data_tag);
-//			ptDataFieldBean.setFieldType(field_type);
-//			ptDataFieldBean.setFieldUnit(field_unit);
-//			ptDataFieldBean.setModifiedUserBo(this.getUserBo(request));
-//			
-//			List<PtDataFieldValueBean> valueList=new ArrayList<PtDataFieldValueBean>();
-//			JSONArray jsonArray = jsonObj.optJSONArray("TABLE_DATA");
-//			for (int i = 0; i < jsonArray.size(); i++) {
-//				PtDataFieldValueBean dataFieldValueBean = ptDataFieldBean.new PtDataFieldValueBean();
-//				JSONObject _jsonObj = jsonArray.getJSONObject(i);
-//				
-//				String sequence = _jsonObj.optString("sequence");
-//				String data_value = _jsonObj.optString("data_value");
-//				String data_tag1 = _jsonObj.optString("data_tag");
-//				String is_default = _jsonObj.optString("is_default");
-//			
-//				dataFieldValueBean.setSequence(sequence);
-//				dataFieldValueBean.setDataValue(data_value);
-//				dataFieldValueBean.setDataTag(data_tag1);
-//				dataFieldValueBean.setIsDefault(is_default);
-//				valueList.add(dataFieldValueBean);
-//			}
-//			ptDataFieldBean.setDataFieldValueList(valueList);
-//			dataFieldService.update(ptDataFieldBean);
+		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			PT_DataField ptdatafieldbean = new PT_DataField();
+			String dataStr = request.getParameter("DATA");
+			JSONObject jsonObj = JSONObject.fromObject(dataStr);
+			String data_field = jsonObj.optString("DATA_FIELD");
+			String description = jsonObj.optString("DESCRIPTION");
+			String mark_group = jsonObj.optString("PT_MASK_GROUP_BO");
+			String data_tag = jsonObj.optString("DATA_TAG");
+			String field_type = jsonObj.optString("FIELD_TYPE");
+			String field_unit = jsonObj.optString("FIELD_UNIT");
+			
+			ptdatafieldbean.setSequence(1001+data_field);
+			ptdatafieldbean.setPtMaskGroupBo(mark_group);	
+			ptdatafieldbean.setDataField(data_field);
+			ptdatafieldbean.setDescription(description);
+			ptdatafieldbean.setDataTag(data_tag);
+			ptdatafieldbean.setFieldType(field_type);
+			ptdatafieldbean.setFieldUnit(field_unit);
+			
+			List<PT_DataFileList> valueList=new ArrayList<PT_DataFileList>();
+			JSONArray jsonArray = jsonObj.optJSONArray("TABLE_DATA");
+			for (int i = 0; i < jsonArray.size(); i++) {
+				PT_DataFileList datafieldvaluebean = new PT_DataFileList();
+				JSONObject _jsonObj = jsonArray.getJSONObject(i);
+				
+				String sequence = _jsonObj.optString("sequence");
+				String data_value = _jsonObj.optString("data_value");
+				String data_tag1 = _jsonObj.optString("data_tag");
+				String is_default = _jsonObj.optString("is_default");
+			
+				datafieldvaluebean.setHandle(data_field+sequence);
+				datafieldvaluebean.setSequence(sequence);
+				datafieldvaluebean.setDataValue(data_value);
+				datafieldvaluebean.setDataTag(data_tag1);
+				datafieldvaluebean.setIsDefault(is_default);
+				valueList.add(datafieldvaluebean);
+			}
+			ptdatafieldbean.setDataFieldValueList(valueList);
+			this.dataFieldService.updateByPrimaryKeySelective(ptdatafieldbean);
 			outPrintJsonRight(request, response, "更新成功");
-//		} catch (Exception e) {
-//			outPrintJsonException(request, response, e);
-//		}
+		} catch (Exception e) {
+			outPrintJsonException(request, response, e);
+		}
 	}
 	//删除页面
 	@RequestMapping(value = "/config/datafield/deleteDataField.html")
 	public void deleteDataField(HttpServletRequest request,
 			HttpServletResponse response) {
-//		try {
-//			request.setCharacterEncoding("UTF-8");
-//			response.setCharacterEncoding("UTF-8");
-//			
-			String  datafieldbo = request.getParameter("DATA") ;
-//			
-//			String dataStr = request.getParameter("DATA");
-//			JSONObject jsonObj = JSONObject.fromObject(dataStr);
-//			String data_field = jsonObj.optString("DATA_FIELD");
-//			
-//			ptdatafieldbean.setPlant(this.getPlant(request));
-//			ptdatafieldbean.setDataField(data_field);
-//			ptdatafieldbean.setCompany(this.getCompany(request));
-//			
-//			try {
-//				dataFieldService.deleteByPrimaryKey(datafieldbo);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				outPrintJsonException(request, response, e);
-//			}	
+		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			String dataStr = request.getParameter("DATA");
+			JSONObject jsonObj = JSONObject.fromObject(dataStr);
+			String datafield = jsonObj.optString("DATA_FIELD");
+			
+			dataFieldService.deleteByPrimaryKey(datafield);
 			outPrintJsonRight(request, response, "删除成功");
-//		} catch (Exception e) {
-//			outPrintJsonException(request, response, e);
-//		}
+		} catch (Exception e) {
+			outPrintJsonException(request, response, e);
+		}
 	}
 
 }

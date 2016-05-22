@@ -89,65 +89,80 @@ public class CorrelationuptController
 		String [] selectsearch = request.getParameterValues("selectsearch");
 		String [] selectexport =request.getParameterValues("selectexport");
 		String [] selectcheck = request.getParameterValues("selectcheck");
-		
-		List<Correlationupt> correlationuptList = new ArrayList<Correlationupt>();
-		for(int i=0; i<permissionid.length;i++)
+		if(!(userid==null || userid.equals("")))
 		{
-			Permission permission  = new Permission();
-			Correlationupt correlationupt = new Correlationupt();
-			permission.setPermissionid(permissionid[i]);
-			permission.setAppend(selectadd[i]);
-			permission.setDel(selectdelete[i]);
-			permission.setUpd(selectupdate[i]);
-			permission.setSearch(selectsearch[i]);
-			permission.setExp(selectexport[i]);
-			permission.setChe(selectcheck[i]);
-			correlationupt.setPermission(permission);
-			correlationuptList.add(correlationupt);
-		}
-		
-		String [] newtablename = request.getParameterValues("newtablename");
-		String [] newselectadd = request.getParameterValues("newselectadd");
-		String [] newselectdelete = request.getParameterValues("newselectdelete");
-		String [] newselectupdate = request.getParameterValues("newselectupdate");
-		String [] newselectsearch = request.getParameterValues("newselectsearch");
-		String [] newselectexport =request.getParameterValues("newselectexport");
-		String [] newselectcheck = request.getParameterValues("newselectcheck");
-		
-		if(!(index==null))
-		{
-			for(int i=0; i<newselectadd.length;i++)
+			List<Correlationupt> correlationuptList = new ArrayList<Correlationupt>();
+			if(permissionid !=null)
 			{
-				if(newtablename[i] == null||newtablename[i].equals(""))
+				for(int i=0; i<permissionid.length;i++)
 				{
-					continue;
+					Permission permission  = new Permission();
+					Correlationupt correlationupt = new Correlationupt();
+					permission.setPermissionid(permissionid[i]);
+					permission.setAppend(selectadd[i]);
+					permission.setDel(selectdelete[i]);
+					permission.setUpd(selectupdate[i]);
+					permission.setSearch(selectsearch[i]);
+					permission.setExp(selectexport[i]);
+					permission.setChe(selectcheck[i]);
+					correlationupt.setPermission(permission);
+					correlationuptList.add(correlationupt);
 				}
-				Permission permission  = new Permission();
-				Table table = new Table();
-				Correlationupt correlationupt = new Correlationupt();
-				table.setTablename(newtablename[i]);
-				permission.setAppend(newselectadd[i]);
-				permission.setDel(newselectdelete[i]);
-				permission.setUpd(newselectupdate[i]);
-				permission.setSearch(newselectsearch[i]);
-				permission.setExp(newselectexport[i]);
-				permission.setChe(newselectcheck[i]);
-				correlationupt.setUserid(userid);
-				correlationupt.setPermission(permission);
-				correlationupt.setTable(table);
-				correlationuptList.add(correlationupt);
 			}
+		
+		
+			String [] newtablename = request.getParameterValues("newtablename");
+			String [] newselectadd = request.getParameterValues("newselectadd");
+			String [] newselectdelete = request.getParameterValues("newselectdelete");
+			String [] newselectupdate = request.getParameterValues("newselectupdate");
+			String [] newselectsearch = request.getParameterValues("newselectsearch");
+			String [] newselectexport =request.getParameterValues("newselectexport");
+			String [] newselectcheck = request.getParameterValues("newselectcheck");
+		
+			if(!(index==null))
+			{
+				for(int i=0; i<newselectadd.length;i++)
+				{
+					if(newtablename[i] == null||newtablename[i].equals(""))
+					{
+						continue;
+					}
+					Permission permission  = new Permission();
+					Table table = new Table();
+					Correlationupt correlationupt = new Correlationupt();
+					table.setTablename(newtablename[i]);
+					permission.setAppend(newselectadd[i]);
+					permission.setDel(newselectdelete[i]);
+					permission.setUpd(newselectupdate[i]);
+					permission.setSearch(newselectsearch[i]);
+					permission.setExp(newselectexport[i]);
+					permission.setChe(newselectcheck[i]);
+					correlationupt.setUserid(userid);
+					correlationupt.setPermission(permission);
+					correlationupt.setTable(table);
+					correlationuptList.add(correlationupt);
+				}
+			}
+		
+			if(correlationuptList.isEmpty())
+			{
+				model.addAttribute("mess", "修改失败");
+			}else
+			{
+				this.correlationuptService.updateByPermissionAndTable(correlationuptList);
+				
+				List<Correlationupt> correlationuptListresult = this.correlationuptService.selectByUserid(userid);
+			
+				User user = this.userservice.selectByPrimaryKey(userid); 
+				
+				model.addAttribute("user", user);
+				model.addAttribute("correlationuptList", correlationuptListresult);
+				model.addAttribute("mess", "修改成功");
+			}
+		}else
+		{
+			model.addAttribute("mess", "请先检索要修改的用户：<a href='/mymaven/com/cai/config/user/user.jsp'>用户管理</a>");
 		}
-		
-		this.correlationuptService.updateByPermissionAndTable(correlationuptList);
-		
-		List<Correlationupt> correlationuptListresult = this.correlationuptService.selectByUserid(userid);
-		
-		User user = this.userservice.selectByPrimaryKey(userid); 
-		
-		model.addAttribute("user", user);
-		model.addAttribute("correlationuptList", correlationuptListresult);
-		model.addAttribute("succ", "修改成功");
 		return "/config/user/user_permission";
 	}
 	

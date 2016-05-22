@@ -1,5 +1,6 @@
 package com.cai.pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class PT_DataField {
 
     private String booleanZeroValue;
 
-    private Date createDate;
+    private Timestamp createDate;
 
-    private Date modifiedDate;
+    private Timestamp modifiedDate;
     
     private List<PT_DataFileList> dataFieldValueList;
     
@@ -111,19 +112,29 @@ public class PT_DataField {
         this.booleanZeroValue = booleanZeroValue == null ? null : booleanZeroValue.trim();
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+	
 
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
 
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+	
+
+
+	public Timestamp getModifiedDate() {
+		return modifiedDate;
+	}
+	
+
+
+	public void setModifiedDate(Timestamp modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+	
+
+    
 }

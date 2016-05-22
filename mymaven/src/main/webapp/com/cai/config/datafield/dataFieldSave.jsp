@@ -55,7 +55,7 @@ YUI().use('datatable', 'datatable-scroll', 'datatype-number', 'node', function (
 	    	formatter: function(o){
 	    		var rowCount = table.data.toArray().length;
 	    		var is_default= o.data.IS_DEFAULT || "";
-	    		var htmlStr = '<input type="radio" id="is_default_' + (rowCount - 1) + '" name="is_default" value="' + is_default + '"/>';
+	    		var htmlStr = '<input type="radio" id="is_default_' + (rowCount - 1) + '" name="is_default" value="yes"/>';
                 return htmlStr;
             }
 	    }

@@ -178,7 +178,7 @@ YUI().use('node', 'json-parse', 'json-stringify', function(Y) {
 			Y.one("#DATA_FIELD").set("value", _result[0].DATA_FIELD);
 			Y.one("#DESCRIPTION").set("value", _result[0].DESCRIPTION);
 			Y.one("#DATA_TAG").set("value", _result[0].DATA_TAG);
-			Y.one("#PT_MASK_GROUP_BO").set("value", _result[0].MASK_GROUP);
+			Y.one("#PT_MASK_GROUP_BO").set("value", _result[0].PT_MASK_GROUP_BO);
 			Y.one("#FIELD_TYPE").set("value", _result[0].FIELD_TYPE);
 			Y.one("#FIELD_UNIT").set("value", _result[0].FIELD_UNIT);
 			Y.one('#value_1').set("value",_result[0].BOOLEAN_ONE_VALUE || "");
@@ -268,6 +268,8 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 		Y.one('#DATA_FIELD').set("value", "");
 		Y.one('#DESCRIPTION').set("value", "");
 		Y.one('#DATA_TAG').set("value", "");
+		Y.one('#FIELD_UNIT').set("value", "");
+		Y.one('#FIELD_TYPE').set("value", "");
 		Y.one('#PT_MASK_GROUP_BO').set("value", "");
 		Y.one('#value_1').set("value", "");
 		Y.one('#value_0').set("value", "");
@@ -428,6 +430,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 							<td class="ftkeydatatdlabel">类型:</td>
 							<td class="ftkeydatatdinput">
 							    <select id="FIELD_TYPE" name="FIELD_TYPE"  >
+							    	<option value="">请选择&nbsp;&nbsp;</option>
 									<option value="number">数值</option>
 	                               	<option value="text">文本</option>
 	                               	<option value="textarea">文本域</option>
@@ -453,6 +456,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 							<td class="ftkeydatatdlabel">单位:</td>
 							<td class="ftkeydatatdinput">
 								<select id="FIELD_UNIT" >
+									<option value="">请选择&nbsp;&nbsp;</option>
 									<option value="cm">厘米(cm)</option>
 	                            	<option value="mm">毫米(mm)</option>
 	                               	<option value="dm">分米(dm)</option>

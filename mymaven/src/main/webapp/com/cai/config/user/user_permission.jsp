@@ -10,7 +10,7 @@
 </head>
 <body>
 <!--<c:out value="${user.userid}"></c:out>-->
-<div><p>${succ}</p></div>
+<div><p>${mess}</p></div>
 <h3 align="center">用户权限管理</h3>
 <div align="center">
 	用户名：<input type="text" name="username" value="${user.username}" readonly="readonly"/>

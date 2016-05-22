@@ -139,7 +139,7 @@ YUI().use('node', 'json-parse', 'json-stringify', function(Y) {
 			Y.one("#DATA_FIELD").set("value", _result[0].DATA_FIELD);
 			Y.one("#DESCRIPTION").set("value", _result[0].DESCRIPTION);
 			Y.one("#DATA_TAG").set("value", _result[0].DATA_TAG);
-			Y.one("#PT_MASK_GROUP_BO").set("value", _result[0].MASK_GROUP);
+			Y.one("#PT_MASK_GROUP_BO").set("value", _result[0].PT_MASK_GROUP_BO);
 			Y.one("#FIELD_TYPE").set("value", _result[0].FIELD_TYPE);
 			Y.one("#FIELD_UNIT").set("value", _result[0].FIELD_UNIT);
 			Y.one('#value_1').set("value",_result[0].BOOLEAN_ONE_VALUE);
@@ -195,6 +195,8 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 	var toEmpty = function(){
 		Y.one('#DATA_FIELD').set("value", "");
 		Y.one('#DESCRIPTION').set("value", "");
+		Y.one('#FIELD_UNIT').set("value", "");
+		Y.one('#FIELD_TYPE').set("value", "");
 		Y.one('#DATA_TAG').set("value", "");
 		Y.one('#PT_MASK_GROUP_BO').set("value", "");
 		common.clearMessage();

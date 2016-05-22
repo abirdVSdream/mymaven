@@ -1,7 +1,10 @@
 package com.cai.service.impl;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,14 +32,18 @@ public class DataFieldServiceImpl implements DataFieldService {
 	 * @throws Exception 
      * 
      */
-	public int deleteByPrimaryKey(String datafieldbo) throws Exception{
+	public int deleteByPrimaryKey(String datafield) throws Exception{
 		// TODO Auto-generated method stub
-		if(datafieldbo == null)
+		
+		
+		if(datafield == null || datafield.equals(""))
 		{
 			throw new Exception("datafieldbo is null");
 		}
 		
-		int  Result = this.dataFieldDao.deleteByPrimaryKey(datafieldbo);
+		this.dataFileListDao.deleteByptDataFieldBo(datafield);
+		
+		int  Result = this.dataFieldDao.deleteByPrimaryKey(datafield);
 		
 		return Result;
 	}
@@ -56,9 +63,24 @@ public class DataFieldServiceImpl implements DataFieldService {
 			throw new Exception("datafieldbo is null");
 		}
 		
-		int  Result = this.dataFieldDao.insert(ptDataFieldBean);
+		//插入主表
+	 	Date mydate = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String retStrFormatNowDate = sdFormatter.format(mydate);
+        ptDataFieldBean.setCreateDate(Timestamp.valueOf(retStrFormatNowDate));
+	       
+		this.dataFieldDao.insertSelective(ptDataFieldBean);
 		
-		return Result;
+		//插入从表
+		if(ptDataFieldBean.getDataFieldValueList() != null)
+		{
+			for(int i=0;i<ptDataFieldBean.getDataFieldValueList().size();i++)
+			{
+				this.dataFileListDao.insertSelective(ptDataFieldBean.getDataFieldValueList().get(i));
+			}
+		}
+		
+		return 1;
 	}
 
 	
@@ -155,10 +177,10 @@ public class DataFieldServiceImpl implements DataFieldService {
 	            }
 	            String ptDataFieldBo = null;
 	            
-	            ptDataFieldBo = mapDatafiledResult.get("SEQUENCE")+(String)mapDatafiledResult.get("DATA_FIELD");
+	            ptDataFieldBo = (String)mapDatafiledResult.get("DATA_FIELD");
 	            
 	            
-	            mapDatafiledResult.put("dataFieldValueList",this.dataFileListDao.selectByPrimaryKey(ptDataFieldBo));
+	            mapDatafiledResult.put("dataFieldValueList",this.dataFileListDao.selectBydatafiledbo(ptDataFieldBo));
 	            mapResult.add(mapDatafiledResult);
 	            
 	            return mapResult;
@@ -170,7 +192,9 @@ public class DataFieldServiceImpl implements DataFieldService {
 	        }      
 	    }
 	    
-		
+	/*
+	 * 	更新数据允许字段为空
+	 */
 	  
 	public int updateByPrimaryKeySelective(PT_DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
@@ -178,7 +202,21 @@ public class DataFieldServiceImpl implements DataFieldService {
 		{
 			throw new Exception("ptDataFieldBean is null");
 		}
+		//更新主表
+		Date mydate = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String retStrFormatNowDate = sdFormatter.format(mydate);
+        ptDataFieldBean.setModifiedDate(Timestamp.valueOf(retStrFormatNowDate));
+		
 		int Result =this.dataFieldDao.updateByPrimaryKeySelective(ptDataFieldBean);
+		//更新从表
+		if(ptDataFieldBean.getDataFieldValueList() != null)
+		{
+			for(int i=0;i<ptDataFieldBean.getDataFieldValueList().size();i++)
+			{
+				this.dataFileListDao.updateByPrimaryKeySelective(ptDataFieldBean.getDataFieldValueList().get(i));
+			}
+		}
 		
 		return Result;
 	}
