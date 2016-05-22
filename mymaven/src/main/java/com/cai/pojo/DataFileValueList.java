@@ -1,6 +1,6 @@
 package com.cai.pojo;
 
-public class PT_DataFileList {
+public class DataFileValueList {
     private String handle;
 
     private String ptDataFieldBo;

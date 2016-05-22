@@ -1,11 +1,10 @@
 package com.cai.pojo;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 
-public class PT_DataField {
+public class DataField {
     private String dataField;
 
     private String sequence;
@@ -28,14 +27,14 @@ public class PT_DataField {
 
     private Timestamp modifiedDate;
     
-    private List<PT_DataFileList> dataFieldValueList;
+    private List<DataFileValueList> dataFieldValueList;
     
-    public List<PT_DataFileList> getDataFieldValueList() {
+    public List<DataFileValueList> getDataFieldValueList() {
 		return dataFieldValueList;
 	}
 	
 
-	public void setDataFieldValueList(List<PT_DataFileList> dataFieldValueList) {
+	public void setDataFieldValueList(List<DataFileValueList> dataFieldValueList) {
 		this.dataFieldValueList = dataFieldValueList;
 	}
 	

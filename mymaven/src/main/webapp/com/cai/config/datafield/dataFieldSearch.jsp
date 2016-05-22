@@ -59,6 +59,8 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 	var toEmpty = function(){
 		Y.one('#DATA_FIELD').set("value", "");
 		Y.one('#DESCRIPTION').set("value", "");
+		Y.one('#FIELD_UNIT').set("value", "");
+		Y.one('#FIELD_TYPE').set("value", "");
 		Y.one('#DATA_TAG').set("value", "");
 		Y.one('#MASK_GROUP').set("value", "");
 		table.set('data',[]);
@@ -208,14 +210,14 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 						<tr>
 							<td class="ftkeydatatdlabel">类型:</td>
 							<td>
-							     <select id="FIELD_TYPE" name="FIELD_TYPE" class="type">
+							     <select id="FIELD_TYPE" name="FIELD_TYPE">
 									<option value="">请选择</option>
 									<option value="int">数值</option>
                                 	<option value="char">文本</option>
-                                	<option value="boolean">文本域</option>
-                                	<option value="float">日期</option>
-                                	<option value="boolean">列表</option>
-                                	<option value="float">布尔</option>
+                                	<option value="text">文本域</option>
+                                	<option value="date">日期</option>
+                                	<option value="list">列表</option>
+                                	<option value="boolean">布尔</option>
 								</select>
 							</td>
 							<td class="ftkeydatatdlabel">掩码:</td>
@@ -224,7 +226,7 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 							</td>
 							<td class="ftkeydatatdlabel">单位:</td>
 							<td>
-								<select name="unit" >
+								<select id="FIELD_UNIT" name="FIELD_UNIT" >
 								<option value="">请选择&nbsp;&nbsp;&nbsp;&nbsp;</option>
 								<option value="cm">厘米(cm)&nbsp;&nbsp;&nbsp;</option>
                                 <option value="mm">毫米(dm)&nbsp;&nbsp;&nbsp;</option>

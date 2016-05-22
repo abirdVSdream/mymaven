@@ -12,17 +12,17 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cai.dao.PT_DataFieldMapper;
-import com.cai.dao.PT_DataFileListMapper;
-import com.cai.pojo.PT_DataField;
+import com.cai.dao.DataFieldMapper;
+import com.cai.dao.DataFileValueListMapper;
+import com.cai.pojo.DataField;
 import com.cai.service.DataFieldService;
 
 @Service("dataFieldService")
 public class DataFieldServiceImpl implements DataFieldService {
 	@Resource
-	private PT_DataFieldMapper dataFieldDao;
+	private DataFieldMapper dataFieldDao;
 	@Resource
-	private PT_DataFileListMapper dataFileListDao;
+	private DataFileValueListMapper dataFileListDao;
 
 
 	/**
@@ -56,7 +56,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	 * @throws Exception 
      * 
      */
-	public int insert(PT_DataField ptDataFieldBean) throws Exception {
+	public int insert(DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
 		if(ptDataFieldBean == null)
 		{
@@ -91,7 +91,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	 * @throws Exception 
      * 
      */
-	public int insertSelective(PT_DataField ptDataFieldBean) throws Exception {
+	public int insertSelective(DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
 		if(ptDataFieldBean == null)
 		{
@@ -111,7 +111,7 @@ public class DataFieldServiceImpl implements DataFieldService {
      * 
      */
 	
-	  public List<PT_DataField> selectByAnyKey(PT_DataField ptDataFieldBean) throws Exception {
+	  public List<DataField> selectByAnyKey(DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
 		//入参为空
 		if(null==ptDataFieldBean)
@@ -120,17 +120,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 		}
 		
 		// 存放查询结果
-		PT_DataField Rs = new PT_DataField();
-		
-		 Rs = this.dataFieldDao.selectByAnyOne(ptDataFieldBean);
-		 List <PT_DataField> Result = new ArrayList <PT_DataField>();
-		 if(Rs!=null)
-		 {
-			 Result.add(Rs);
-		 }
-		 
-		 
-		
+		 List <DataField> Result = this.dataFieldDao.selectByAnyOne(ptDataFieldBean);
 		return Result;
 	}
 
@@ -140,7 +130,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	 * @return
 	 * @throws Exception 
 	 */
-		public List<PT_DataField> selectAll() {
+		public List<DataField> selectAll() {
 			// TODO Auto-generated method stub
 			return this.dataFieldDao.selectAll();
 		}  
@@ -196,7 +186,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	 * 	更新数据允许字段为空
 	 */
 	  
-	public int updateByPrimaryKeySelective(PT_DataField ptDataFieldBean) throws Exception {
+	public int updateByPrimaryKeySelective(DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
 		if(ptDataFieldBean == null)
 		{
@@ -221,7 +211,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 		return Result;
 	}
 
-	public int updateByPrimaryKey(PT_DataField ptDataFieldBean) throws Exception {
+	public int updateByPrimaryKey(DataField ptDataFieldBean) throws Exception {
 		// TODO Auto-generated method stub
 		
 		if(ptDataFieldBean == null)

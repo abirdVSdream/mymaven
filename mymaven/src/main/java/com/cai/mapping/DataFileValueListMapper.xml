@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cai.dao.PT_DataFileListMapper" >
-  <resultMap id="BaseResultMap" type="com.cai.pojo.PT_DataFileList" >
+<mapper namespace="com.cai.dao.DataFileValueListMapper" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.DataFileValueList" >
     <id column="HANDLE" property="handle" jdbcType="VARCHAR" />
     <result column="PT_DATA_FIELD_BO" property="ptDataFieldBo" jdbcType="VARCHAR" />
     <result column="SEQUENCE" property="sequence" jdbcType="VARCHAR" />
@@ -36,7 +36,7 @@
     where PT_DATA_FIELD_BO = #{ptDataFieldBo,jdbcType=VARCHAR}
   </delete>
   
-  <insert id="insert" parameterType="com.cai.pojo.PT_DataFileList" >
+  <insert id="insert" parameterType="com.cai.pojo.DataFileValueList" >
     insert into pt_data_field_list (HANDLE, PT_DATA_FIELD_BO, SEQUENCE, 
       DATA_VALUE, DATA_TAG, IS_DEFAULT
       )
@@ -44,7 +44,7 @@
       #{dataValue,jdbcType=VARCHAR}, #{dataTag,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cai.pojo.PT_DataFileList" >
+  <insert id="insertSelective" parameterType="com.cai.pojo.DataFileValueList" >
     insert into pt_data_field_list
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="handle != null" >
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.PT_DataFileList" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.DataFileValueList" >
     update pt_data_field_list
     <set >
       <if test="ptDataFieldBo != null" >
@@ -108,7 +108,7 @@
     </set>
     where HANDLE = #{handle,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.PT_DataFileList" >
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.DataFileValueList" >
     update pt_data_field_list
     set PT_DATA_FIELD_BO = #{ptDataFieldBo,jdbcType=VARCHAR},
       SEQUENCE = #{sequence,jdbcType=VARCHAR},

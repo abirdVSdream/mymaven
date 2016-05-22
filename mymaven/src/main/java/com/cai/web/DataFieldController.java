@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cai.pojo.PT_DataField;
-import com.cai.pojo.PT_DataFileList;
+import com.cai.pojo.DataField;
+import com.cai.pojo.DataFileValueList;
 import com.cai.service.DataFieldService;
 import com.cai.web.base.BaseController;
 
@@ -79,16 +79,17 @@ public class DataFieldController extends BaseController
 			String datatag = request.getParameter("DATA_TAG");
 			String fieldtype = request.getParameter("FIELD_TYPE");
 			String maskgroupbo = request.getParameter("MASK_GROUP");
-			String fieldunit =request.getParameter("unit");
+			String fieldunit =request.getParameter("FIELD_UNIT");
 			
+			List<DataField> result = new ArrayList<DataField>();
 			
-			
-			if(datafield.equals("") && description.equals("") && datatag.equals("") &&fieldtype.equals(""))
+			if(datafield.equals("") && description.equals("") && 
+					datatag.equals("") &&fieldtype.equals("")&&
+					fieldunit.equals("") && maskgroupbo.equals(""))
 			{
-				List<PT_DataField> result = dataFieldService.selectAll();
-				outPrintJsonText(request, response, result);
+				 result = dataFieldService.selectAll();
 			}else{
-				PT_DataField  ptdatafieldbean =  new PT_DataField();
+				DataField  ptdatafieldbean =  new DataField();
 				ptdatafieldbean.setDataField(datafield);;
 				ptdatafieldbean.setDataTag(datatag);
 				ptdatafieldbean.setDescription(description);
@@ -96,9 +97,13 @@ public class DataFieldController extends BaseController
 				ptdatafieldbean.setPtMaskGroupBo(maskgroupbo);
 				ptdatafieldbean.setFieldUnit(fieldunit);
 				
-				List<PT_DataField> result = dataFieldService.selectByAnyKey(ptdatafieldbean);
-				outPrintJsonText(request, response, result);
+				 result = dataFieldService.selectByAnyKey(ptdatafieldbean);
 			}
+			if(result.isEmpty())
+			{
+				outPrintJsonError(request, response, "查找的数据为空");
+			}
+			outPrintJsonText(request, response, result);
 		} catch (Exception e) {
 			outPrintJsonException(request, response, e);
 		}
@@ -111,7 +116,7 @@ public class DataFieldController extends BaseController
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 		
-			PT_DataField  ptdatafieldbean =  new PT_DataField();
+			DataField  ptdatafieldbean =  new DataField();
 			String dataStr = request.getParameter("DATA");
 			JSONObject jsonObj = JSONObject.fromObject(dataStr);
 								
@@ -137,10 +142,10 @@ public class DataFieldController extends BaseController
 			ptdatafieldbean.setBooleanZeroValue(value_zone);
 			ptdatafieldbean.setPtMaskGroupBo(ptMaskGroupBo);
 			
-			List<PT_DataFileList> valueList=new ArrayList<PT_DataFileList>();
+			List<DataFileValueList> valueList=new ArrayList<DataFileValueList>();
 			JSONArray jsonArray = jsonObj.optJSONArray("TABLE_DATA");
 			for (int i = 0; i < jsonArray.size(); i++) {
-				PT_DataFileList datafieldvaluebean= new PT_DataFileList();
+				DataFileValueList datafieldvaluebean= new DataFileValueList();
 				JSONObject _jsonObj = jsonArray.getJSONObject(i);
 				
 				String sequence = _jsonObj.optString("sequence");
@@ -197,7 +202,7 @@ public class DataFieldController extends BaseController
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			
-			PT_DataField ptdatafieldbean = new PT_DataField();
+			DataField ptdatafieldbean = new DataField();
 			String dataStr = request.getParameter("DATA");
 			JSONObject jsonObj = JSONObject.fromObject(dataStr);
 			String data_field = jsonObj.optString("DATA_FIELD");
@@ -215,10 +220,10 @@ public class DataFieldController extends BaseController
 			ptdatafieldbean.setFieldType(field_type);
 			ptdatafieldbean.setFieldUnit(field_unit);
 			
-			List<PT_DataFileList> valueList=new ArrayList<PT_DataFileList>();
+			List<DataFileValueList> valueList=new ArrayList<DataFileValueList>();
 			JSONArray jsonArray = jsonObj.optJSONArray("TABLE_DATA");
 			for (int i = 0; i < jsonArray.size(); i++) {
-				PT_DataFileList datafieldvaluebean = new PT_DataFileList();
+				DataFileValueList datafieldvaluebean = new DataFileValueList();
 				JSONObject _jsonObj = jsonArray.getJSONObject(i);
 				
 				String sequence = _jsonObj.optString("sequence");
