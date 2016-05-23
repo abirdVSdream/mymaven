@@ -182,7 +182,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	        }      
 	    }
 	    
-	/*
+	/**
 	 * 	更新数据允许字段为空
 	 */
 	  
@@ -200,13 +200,29 @@ public class DataFieldServiceImpl implements DataFieldService {
 		
 		int Result =this.dataFieldDao.updateByPrimaryKeySelective(ptDataFieldBean);
 		//更新从表
+//		if(ptDataFieldBean.getDataFieldValueList() != null)
+//		{
+//			for(int i=0;i<ptDataFieldBean.getDataFieldValueList().size();i++)
+//			{
+//				this.dataFileListDao.updateByPrimaryKeySelective(ptDataFieldBean.getDataFieldValueList().get(i));
+//			}
+//		}
+		
+		//删除从表数据
+		String datafilebo = ptDataFieldBean.getDataField();
+		this.dataFileListDao.deleteByptDataFieldBo(datafilebo);
+		
+		//插入从表
 		if(ptDataFieldBean.getDataFieldValueList() != null)
 		{
 			for(int i=0;i<ptDataFieldBean.getDataFieldValueList().size();i++)
 			{
-				this.dataFileListDao.updateByPrimaryKeySelective(ptDataFieldBean.getDataFieldValueList().get(i));
+					ptDataFieldBean.getDataFieldValueList().get(i).setPtDataFieldBo(datafilebo);
+					this.dataFileListDao.insertSelective(ptDataFieldBean.getDataFieldValueList().get(i));
 			}
 		}
+		
+		
 		
 		return Result;
 	}
