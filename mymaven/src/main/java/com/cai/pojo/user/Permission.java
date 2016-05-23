@@ -1,18 +1,19 @@
 package com.cai.pojo.user;
-
+//权限类
 public class Permission {
+	//关联id
     private String permissionid;
-
+    //增加权限
     private String append;
-
+  	//删除权限
     private String del;
-
+    //更新权限
     private String upd;
-
+    //查找权限
     private String search;
-
+    //导出数据权限
     private String exp;
-
+	//审核权限
     private String che;
 
     public String getPermissionid() {
