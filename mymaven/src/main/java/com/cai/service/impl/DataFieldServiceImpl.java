@@ -104,7 +104,7 @@ public class DataFieldServiceImpl implements DataFieldService {
 	}
 
 	/**
-     * 按任何数据查询数据
+     * 按任何数据查询数据当所有数据为空时查找所有的数据
      * @param ptDataFieldBean
      * @return
 	 * @throws Exception 
@@ -124,18 +124,6 @@ public class DataFieldServiceImpl implements DataFieldService {
 		return Result;
 	}
 
-	/**
-	 * 查找所有的数据
-	 * @param ptDataFieldBean
-	 * @return
-	 * @throws Exception 
-	 */
-		public List<DataField> selectAll() {
-			// TODO Auto-generated method stub
-			return this.dataFieldDao.selectAll();
-		}  
-		
-		
 		 /**
 	     * 按主键查询数据
 	     * @param ptDataFieldBean

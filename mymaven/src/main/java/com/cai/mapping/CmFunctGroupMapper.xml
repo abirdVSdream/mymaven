@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cai.dao.CmFunctGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.CmFunctGroup" >
+    <id column="HANDLE" property="handle" jdbcType="VARCHAR" />
+    <result column="FUNCT_GROUP" property="functGroup" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="IMAGE" property="image" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFIED_DATE" property="modifiedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    HANDLE, FUNCT_GROUP, DESCRIPTION, MEMO, IMAGE, CREATE_DATE, MODIFIED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cm_funct_group
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="selectByAnyOne"  resultMap="BaseResultMap" parameterType="com.cai.pojo.CmFunctGroup" >
+    select 
+    <include refid="Base_Column_List" />
+    from cm_funct_group
+    <where>
+      <if test="functGroup != null and functGroup != ''" >
+        FUNCT_GROUP = #{functGroup,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null and description != ''" >
+       AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="memo != null and memo != ''" >
+       AND MEMO = #{memo,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cm_funct_group
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cai.pojo.CmFunctGroup" >
+    insert into cm_funct_group (HANDLE, FUNCT_GROUP, DESCRIPTION, 
+      MEMO, IMAGE, CREATE_DATE, 
+      MODIFIED_DATE)
+    values (#{handle,jdbcType=VARCHAR}, #{functGroup,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifiedDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cai.pojo.CmFunctGroup" >
+    insert into cm_funct_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="handle != null" >
+        HANDLE,
+      </if>
+      <if test="functGroup != null" >
+        FUNCT_GROUP,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="memo != null" >
+        MEMO,
+      </if>
+      <if test="image != null" >
+        IMAGE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifiedDate != null" >
+        MODIFIED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="handle != null" >
+        #{handle,jdbcType=VARCHAR},
+      </if>
+      <if test="functGroup != null" >
+        #{functGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedDate != null" >
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.CmFunctGroup" >
+    update cm_funct_group
+    <set >
+      <if test="functGroup != null" >
+        FUNCT_GROUP = #{functGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        IMAGE = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedDate != null" >
+        MODIFIED_DATE = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.CmFunctGroup" >
+    update cm_funct_group
+    set FUNCT_GROUP = #{functGroup,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      IMAGE = #{image,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFIED_DATE = #{modifiedDate,jdbcType=TIMESTAMP}
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </update>
+</mapper>

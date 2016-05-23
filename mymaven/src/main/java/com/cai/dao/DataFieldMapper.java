@@ -17,8 +17,6 @@ public interface DataFieldMapper {
     
     List<DataField> selectByAnyOne(DataField datafield);
     
-    List<DataField> selectAll();
-
     int updateByPrimaryKeySelective(DataField record);
 
     int updateByPrimaryKey(DataField record);

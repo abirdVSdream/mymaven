@@ -23,14 +23,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cai.pojo.CmFunctGroup;
+import com.cai.service.FunctGroupService;
 import com.cai.web.base.BaseController;
 
 
 
 @Controller
 public class FunctGroupController extends BaseController {
-//	@Autowired
-//	private FunctGroupServiceI functGroupService;
+	@Autowired
+	private FunctGroupService functGroupService;
 //	@Autowired
 //	private ParamGroupServiceI paramGroupService;
 	
@@ -77,33 +79,32 @@ public class FunctGroupController extends BaseController {
 		return gotoIndexPage(request, response, urlMap);
 	}
 	
-//	//查询
-//	@RequestMapping(value="/admin/functgroup/searchFunctGroup.html")
-//	public void searchFunMaintenance(HttpServletRequest request, 
-//			HttpServletResponse response){
-//		try{
-//			request.setCharacterEncoding("UTF-8");
-//			response.setCharacterEncoding("UTF-8");
-//			
-//			//查询条件
-//			String functGroup = request.getParameter("FUNCT_GROUP");
-//			String groupName = request.getParameter("GROUP_NAME");
-//			String memo = request.getParameter("MEMO");
-//			
-//			CmFunctGroupBean cmFunctGroupBean = new CmFunctGroupBean();
-//			
-//			cmFunctGroupBean.setCompany(this.getCompany(request));
-//			cmFunctGroupBean.setFunctGroup(functGroup);
-//			cmFunctGroupBean.setGroupName(groupName);
-//			cmFunctGroupBean.setMemo(memo);
-//			
-//			List<Map<String, Object>> list = functGroupService.select(cmFunctGroupBean);//按照查询条件查询到的数据
-//			outPrintJsonText(request, response, list);//把list查询结果转换成json字符串并传递到页面--chy
-//		}catch(Exception e){
-//			outPrintJsonException(request, response, e);
-//		}	
-//	}
-//	
+	//查询
+	@RequestMapping(value="/cai/functgroup/searchFunctGroup.html")
+	public void searchFunMaintenance(HttpServletRequest request, 
+			HttpServletResponse response){
+		try{
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			//查询条件
+			String functGroup = request.getParameter("FUNCT_GROUP");
+			String description = request.getParameter("DESCRIPTION");
+			String memo = request.getParameter("MEMO");
+			
+			CmFunctGroup cmFunctGroupBean = new CmFunctGroup();
+			
+			cmFunctGroupBean.setFunctGroup(functGroup);
+			cmFunctGroupBean.setDescription(description);
+			cmFunctGroupBean.setMemo(memo);
+			
+			List<CmFunctGroup> list = functGroupService.selectByAnyOne(cmFunctGroupBean);//按照查询条件查询到的数据
+			outPrintJsonText(request, response, list);//把list查询结果转换成json字符串并传递到页面--chy
+		}catch(Exception e){
+			outPrintJsonException(request, response, e);
+		}	
+	}
+	
 //	//查看
 //	@RequestMapping(value="/admin/functgroup/checkFunctGroup.html")
 //	public void  checkFunMaintenance(HttpServletRequest request , HttpServletResponse response){

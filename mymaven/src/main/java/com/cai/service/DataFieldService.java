@@ -19,8 +19,6 @@ public interface DataFieldService
 	
 	public List<DataField> selectByAnyKey(DataField ptDataFieldBean) throws Exception;
 	
-	public List<DataField> selectAll();
-	
 	public int updateByPrimaryKeySelective(DataField ptDataFieldBean) throws Exception;
 
 	public int updateByPrimaryKey(DataField ptDataFieldBean) throws Exception;

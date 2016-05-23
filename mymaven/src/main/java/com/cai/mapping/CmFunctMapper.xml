@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cai.dao.CmFunctMapper" >
+  <resultMap id="BaseResultMap" type="com.cai.pojo.CmFunct" >
+    <id column="HANDLE" property="handle" jdbcType="VARCHAR" />
+    <result column="FUNCT" property="funct" jdbcType="VARCHAR" />
+    <result column="ISVALID" property="isvalid" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="LINKS" property="links" jdbcType="VARCHAR" />
+    <result column="FUNCTTYPE" property="functtype" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFIED_DATE" property="modifiedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    HANDLE, FUNCT, ISVALID, DESCRIPTION, LINKS, FUNCTTYPE, CREATE_DATE, MODIFIED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cm_funct
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cm_funct
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cai.pojo.CmFunct" >
+    insert into cm_funct (HANDLE, FUNCT, ISVALID, 
+      DESCRIPTION, LINKS, FUNCTTYPE, 
+      CREATE_DATE, MODIFIED_DATE)
+    values (#{handle,jdbcType=VARCHAR}, #{funct,jdbcType=VARCHAR}, #{isvalid,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{links,jdbcType=VARCHAR}, #{functtype,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifiedDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cai.pojo.CmFunct" >
+    insert into cm_funct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="handle != null" >
+        HANDLE,
+      </if>
+      <if test="funct != null" >
+        FUNCT,
+      </if>
+      <if test="isvalid != null" >
+        ISVALID,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="links != null" >
+        LINKS,
+      </if>
+      <if test="functtype != null" >
+        FUNCTTYPE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifiedDate != null" >
+        MODIFIED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="handle != null" >
+        #{handle,jdbcType=VARCHAR},
+      </if>
+      <if test="funct != null" >
+        #{funct,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="links != null" >
+        #{links,jdbcType=VARCHAR},
+      </if>
+      <if test="functtype != null" >
+        #{functtype,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedDate != null" >
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cai.pojo.CmFunct" >
+    update cm_funct
+    <set >
+      <if test="funct != null" >
+        FUNCT = #{funct,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        ISVALID = #{isvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="links != null" >
+        LINKS = #{links,jdbcType=VARCHAR},
+      </if>
+      <if test="functtype != null" >
+        FUNCTTYPE = #{functtype,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedDate != null" >
+        MODIFIED_DATE = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cai.pojo.CmFunct" >
+    update cm_funct
+    set FUNCT = #{funct,jdbcType=VARCHAR},
+      ISVALID = #{isvalid,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      LINKS = #{links,jdbcType=VARCHAR},
+      FUNCTTYPE = #{functtype,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFIED_DATE = #{modifiedDate,jdbcType=TIMESTAMP}
+    where HANDLE = #{handle,jdbcType=VARCHAR}
+  </update>
+</mapper>

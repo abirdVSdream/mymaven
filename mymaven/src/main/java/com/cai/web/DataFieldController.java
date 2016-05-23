@@ -82,13 +82,6 @@ public class DataFieldController extends BaseController
 			String fieldunit =request.getParameter("FIELD_UNIT");
 			
 			List<DataField> result = new ArrayList<DataField>();
-			
-			if(datafield.equals("") && description.equals("") && 
-					datatag.equals("") &&fieldtype.equals("")&&
-					fieldunit.equals("") && maskgroupbo.equals(""))
-			{
-				 result = dataFieldService.selectAll();
-			}else{
 				DataField  ptdatafieldbean =  new DataField();
 				ptdatafieldbean.setDataField(datafield);;
 				ptdatafieldbean.setDataTag(datatag);
@@ -97,14 +90,15 @@ public class DataFieldController extends BaseController
 				ptdatafieldbean.setPtMaskGroupBo(maskgroupbo);
 				ptdatafieldbean.setFieldUnit(fieldunit);
 				
-				 result = dataFieldService.selectByAnyKey(ptdatafieldbean);
-			}
-			if(result.isEmpty())
-			{
-				outPrintJsonError(request, response, "查找的数据为空");
-			}
-			outPrintJsonText(request, response, result);
-		} catch (Exception e) {
+				result = dataFieldService.selectByAnyKey(ptdatafieldbean);
+			
+				if(result.isEmpty())
+				{
+					outPrintJsonError(request, response, "查找的数据为空");
+				}
+				outPrintJsonText(request, response, result);
+				
+			} catch (Exception e) {
 			outPrintJsonException(request, response, e);
 		}
 	}

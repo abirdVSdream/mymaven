@@ -41,7 +41,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
             useDisabled: true
         }
 	}; 
-	var sUrl = "${rootPath}/admin/functgroup/searchFunctGroup.html"; 
+	var sUrl = "${rootPath}/cai/functgroup/searchFunctGroup.html"; 
 	function makeRequest(){ 
 		var request = Y.io(sUrl, cfg); 
 	} 
@@ -50,8 +50,9 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 	
 	var toEmpty = function(){
 		Y.one("#FUNCT_GROUP").set("value", "");
-		Y.one("#GROUP_NAME").set("value", "");
+		Y.one("#DESCRIPTION").set("value", "");
 		Y.one("#MEMO").set("value", "");
+		table.set('data',[]);
 		common.clearMessage();//调用清除消息方法
 	}
 	Y.on("click", toEmpty, "#toEmpty");//注册按钮点击事件 清空数据
@@ -91,14 +92,14 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 	table = new Y.DataTable({
 		columns: [
 	  	   // { key: 'HANDLE', label: '序列', width: '10%' },
-		    { key: 'FUNCT_GROUP', label: '功能组', width: '20%' },
-		    { key: 'GROUP_NAME', label: '描述', width: '10%'},
-		    { key: 'MEMO', label: '备注', width: '15%' },
-		    { key: 'IMAGE', label: '链接路径', width: '10%' },
-		    { key: 'HANDLE', label: '明细',
+		    { key: 'functGroup', label: '功能组', width: '20%' },
+		    { key: 'description', label: '描述', width: '10%'},
+		    { key: 'memo', label: '备注', width: '15%' },
+		    { key: 'image', label: '链接路径', width: '10%' },
+		    { key: 'handle', label: '明细',
 		    	
 		    	formatter: function(o){
-		        	var funct_group = o.data.FUNCT_GROUP;
+		        	var funct_group = o.data.functGroup;
 		        	var htmlStr = "";
 		        	htmlStr = '<a href="${rootPath}/cai/functgroup/gotoPage.html?OPER=CHECK&FUNCT_GROUP=' + funct_group +  '">查看</a>&nbsp;&nbsp;&nbsp;'+
 				     		   '<a href="${rootPath}/cai/functgroup/gotoPage.html?OPER=UPDATE&FUNCT_GROUP=' + funct_group + '">更新</a>&nbsp;&nbsp;&nbsp;'+
@@ -183,7 +184,7 @@ YUI().use('datatable', 'datatable-paginator', 'datatype-number', 'node', functio
 		    			<tr>
 							<td class="ftkeydatatdlabel">描述:</td>
 							<td>
-								<input id="GROUP_NAME" name="GROUP_NAME" type="text" size="25"/>
+								<input id="DESCRIPTION" name="DESCRIPTION" type="text" size="25"/>
 							</td>
 							<td class="ftkeydatatdlabel">备注:</td>
 							<td>

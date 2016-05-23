@@ -64,14 +64,6 @@
       </where>
   </select>
   
-  
-  <select id="selectAll" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from pt_data_field
-  </select>
-  
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from pt_data_field
     where DATA_FIELD = #{dataField,jdbcType=VARCHAR}
