@@ -21,6 +21,11 @@
   </select>
   
   
+  <select id="selectgroupnotin" resultMap="BaseResultMap">
+    select g.HANDLE,g.FUNCT_GROUP,g.DESCRIPTION
+    from cm_funct_group as g, cm_fg_member as m where g.HANDLE != m.CM_FUNCT_GROUP_BO
+  </select>
+  
   <select id="selectByAnyOne"  resultMap="BaseResultMap" parameterType="com.cai.pojo.CmFunctGroup" >
     select 
     <include refid="Base_Column_List" />

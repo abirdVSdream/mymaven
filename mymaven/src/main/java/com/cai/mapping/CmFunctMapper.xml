@@ -20,6 +20,12 @@
     from cm_funct
     where HANDLE = #{handle,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectfunctnotin" resultMap="BaseResultMap">
+    select f.HANDLE,f.FUNCT,f.DESCRIPTION
+    from cm_funct as f, cm_fg_member as m where f.HANDLE != m.CM_FUNCT_BO
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from cm_funct
     where HANDLE = #{handle,jdbcType=VARCHAR}

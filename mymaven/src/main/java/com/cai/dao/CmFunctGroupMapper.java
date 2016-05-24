@@ -14,6 +14,8 @@ public interface CmFunctGroupMapper {
     CmFunctGroup selectByPrimaryKey(String handle);
     
     List<CmFunctGroup> selectByAnyOne(CmFunctGroup cmfunctgroup);
+    
+    List<CmFunctGroup> selectgroupnotin();
 
     int updateByPrimaryKeySelective(CmFunctGroup record);
 

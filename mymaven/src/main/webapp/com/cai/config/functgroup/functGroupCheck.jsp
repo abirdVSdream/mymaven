@@ -39,7 +39,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify','event', 'imes-YuiCommon'
 		var data = {};
 		data.FUNCT_GROUP = funct_group;
 		var dataStr = Y.JSON.stringify(data);
-		var request = Y.io("${rootPath}/admin/functgroup/checkFunctGroup.html", { 
+		var request = Y.io("${rootPath}/cai/functgroup/checkFunctGroup.html", { 
 			method: "POST", 
 			data: "DATA=" + dataStr,
 			on: {
@@ -65,7 +65,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify','event', 'imes-YuiCommon'
 		var result = _data.result;
 		Y.one("#FUNCT_GROUP").set("value", result.FUNCT_GROUP);
 		Y.one("#GROUP_NAME").set("value", result.GROUP_NAME);
-			var html = "";
+			/** var html = "";
 			if(result.functGroupMemberList != null)
 			{
 				for(var i = 0;i < result.functGroupMemberList.length;i++)
@@ -76,8 +76,21 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify','event', 'imes-YuiCommon'
 					html = html + "<option value='" + funct_group + "' >" + group_name +"</option>";
 				}
 				Y.one("#functGroup" ).set("innerHTML", html);
+			} */
+			
+			var html = "";
+			if(result.functGroupMemberList != null)
+			{
+				for(var i = 0;i < result.functGroupMemberList.length;i++)
+				{
+					var cmFunctGroupBo = result.functGroupMemberList[i].cmFunctGroupBo;//描述
+					functGroupMemberList[i] = funct_group + "," + group_name;
+					html = html + "<option value='" + cmFunctGroupBo + "' >" + cmFunctGroupBo +"</option>";
+				}
+				Y.one("#functGroup" ).set("innerHTML", html);
 			}
-			var html2="";
+			
+			/** var html2="";
 			if(result.functGroupNotInList != null)
 			{
 				for(var i = 0;i < result.functGroupNotInList.length;i++)
@@ -89,8 +102,22 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify','event', 'imes-YuiCommon'
 				}
 				Y.one("#functGroupNotIn" ).set("innerHTML", html2);
 			}
+			*/
+			var html2="";
+			if(result.functGroupNotInList != null)
+			{
+				for(var i = 0;i < result.functGroupNotInList.length;i++)
+				{
+					var description = result.functGroupNotInList[i].description;//描述
+					var functGroup = result.functGroupNotInList[i].functGroup; //value
+					functGroupNotInList[i] = funct_group + "," + group_name;
+					html2 = html2 + "<option value='" + functGroup + "' >" + description +"</option>";
+				}
+				Y.one("#functGroupNotIn" ).set("innerHTML", html2);
+			}
 			
-			var html3 = "";
+			
+			/** var html3 = "";
 			if(result.functMemberList != null)
 			{
 				for(var i = 0;i < result.functMemberList.length;i++)
@@ -101,8 +128,20 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify','event', 'imes-YuiCommon'
 					html3 = html3 + "<option value='" + funct + "' >" + funct_name+"</option>";
 				}
 				Y.one("#funct" ).set("innerHTML", html3);
+			}*/
+			var html3 = "";
+			if(result.functGroupMemberList != null)
+			{
+				for(var i = 0;i < result.functGroupMemberList.length;i++)
+				{
+				
+					functGroupMemberList[i] = funct_group + "," + group_name;
+					html3 = html3 + "<option value='" + cmFunctBo + "' >" + cmFunctBo +"</option>";
+				}
+				Y.one("#functGroup" ).set("innerHTML", html);
 			}
-			var html4="";
+			
+			/** var html4="";
 			if(result.functUnAssignedList != null)
 			{
 				for(var i = 0;i < result.functUnAssignedList.length;i++)
@@ -111,6 +150,20 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify','event', 'imes-YuiCommon'
 					var funct = result.functUnAssignedList[i].FUNCT; //value
 					functUnAssignedList[i] = funct + "," +funct_name;
 					html4 = html4 + "<option value='" + funct + "' >" + funct_name+"</option>";
+				}
+				Y.one("#functUnAssigned" ).set("innerHTML", html4);
+			}
+			*/
+			var html4="";
+			
+			if(result.functUnAssignedList != null)
+			{
+				for(var i = 0;i < result.functUnAssignedList.length;i++)
+				{
+					var description = result.functUnAssignedList[i].description;//描述
+					var funct = result.functUnAssignedList[i].funct; //value
+					functUnAssignedList[i] = funct + "," +funct_name;
+					html4 = html4 + "<option value='" + funct + "' >" + description+"</option>";
 				}
 				Y.one("#functUnAssigned" ).set("innerHTML", html4);
 			}

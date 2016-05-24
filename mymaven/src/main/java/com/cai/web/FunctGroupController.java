@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cai.pojo.CmFunct;
 import com.cai.pojo.CmFunctGroup;
 import com.cai.service.FunctGroupService;
 import com.cai.web.base.BaseController;
@@ -52,30 +53,31 @@ public class FunctGroupController extends BaseController {
 		urlMap.put("CHECK", CHECK_URL);
 		urlMap.put("UPDATE", UPDATE_URL);
 		urlMap.put("DELETE", DELETE_URL);
-//		try {
-//			request.setCharacterEncoding("UTF-8");
-//			response.setCharacterEncoding("UTF-8");
-//
-//			String company = this.getCompany(request);
-//			String functGroup = request.getParameter("FUNCT_GROUP");
-//			CmFunctGroupBean cmFunctGroupBean = new CmFunctGroupBean();
-//			cmFunctGroupBean.setCompany(company);
-//			cmFunctGroupBean.setFunctGroup(functGroup);
-//			
-//			// 检索数据
-//			List<Map<String, Object>>functGroupNotIntList = functGroupService.getFunctGroupNotInList(company);
-//			List<Map<String, Object>>functNotIntList = functGroupService.getFunctUnAssignedList(company);
+		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+
+			String functGroup = request.getParameter("FUNCT_GROUP");
+			
+			CmFunctGroup cmFunctGroupBean = new CmFunctGroup();
+			
+			cmFunctGroupBean.setHandle(1001+functGroup);
+			cmFunctGroupBean.setFunctGroup(functGroup);
+			
+			// 检索数据
+//			List<CmFunctGroup>functGroupNotIntList = functGroupService.selectFunctGroupNotInList();
+//			List<CmFunct>functNotIntList = functGroupService.selectFunctNotInList();
 //
 //			request.setAttribute("functGroupNotIntList", getJsonText(functGroupNotIntList));
 //			request.setAttribute("functNotIntList", getJsonText(functNotIntList));
 //			
-//			Map<String, Object> map = functGroupService.retrieve(cmFunctGroupBean);
-//			
-//			request.setAttribute("FUNCTGROUP_RESULT", getJsonText(map));
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+			Map<String, Object> map = functGroupService.selectfromCmFgMember(cmFunctGroupBean);
+			
+			request.setAttribute("FUNCTGROUP_RESULT", getJsonText(map));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return gotoIndexPage(request, response, urlMap);
 	}
 	
@@ -105,31 +107,32 @@ public class FunctGroupController extends BaseController {
 		}	
 	}
 	
-//	//查看
-//	@RequestMapping(value="/admin/functgroup/checkFunctGroup.html")
-//	public void  checkFunMaintenance(HttpServletRequest request , HttpServletResponse response){
-//		try{
-//			
-//			request.setCharacterEncoding("UTF-8");
-//			response.setCharacterEncoding("UTF-8");
-//			
-//			String dataStr = request.getParameter("DATA");
-//			JSONObject jsonObj = JSONObject.fromObject(dataStr);
-//			
-//			String functGroup = jsonObj.optString("FUNCT_GROUP");
-//			
-//			
-//			CmFunctGroupBean cmFunctGroupBean = new CmFunctGroupBean();
-//			cmFunctGroupBean.setCompany(this.getCompany(request));
-//			cmFunctGroupBean.setFunctGroup(functGroup);;
-//			
-//			Map<String, Object> list = functGroupService.retrieve(cmFunctGroupBean);
-//			outPrintJsonText(request, response, list);
-//		}catch(Exception e){
-//			outPrintJsonException(request, response, e);
-//			}
-//	}
-//	
+	//查看
+	@RequestMapping(value="/cai/functgroup/checkFunctGroup.html")
+	public void  checkFunMaintenance(HttpServletRequest request , HttpServletResponse response){
+		try{
+			
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			String dataStr = request.getParameter("DATA");
+			JSONObject jsonObj = JSONObject.fromObject(dataStr);
+			
+			String functGroup = jsonObj.optString("FUNCT_GROUP");
+			
+			
+			CmFunctGroup cmFunctGroupBean = new CmFunctGroup();
+			
+			cmFunctGroupBean.setHandle(1001+functGroup);
+			cmFunctGroupBean.setFunctGroup(functGroup);
+			
+			Map<String, Object> list = functGroupService.selectfromCmFgMember(cmFunctGroupBean);
+			outPrintJsonText(request, response, list);
+		}catch(Exception e){
+			outPrintJsonException(request, response, e);
+			}
+	}
+	
 //	public CmFunctGroupBean showParam(HttpServletRequest request,String dataStr)
 //	{
 //		JSONObject jsonObj = JSONObject.fromObject(dataStr);

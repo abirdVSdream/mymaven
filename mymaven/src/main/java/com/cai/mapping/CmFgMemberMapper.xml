@@ -5,6 +5,22 @@
     <result column="CM_FUNCT_GROUP_BO" property="cmFunctGroupBo" jdbcType="VARCHAR" />
     <result column="CM_FUNCT_BO" property="cmFunctBo" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  <select id="selectByFunctGroupBo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    CM_FUNCT_GROUP_BO,CM_FUNCT_BO
+    from cm_fg_member
+    where CM_FUNCT_GROUP_BO = #{cmFunctGroupBo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByFunctBo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    CM_FUNCT_GROUP_BO,CM_FUNCT_BO
+    from cm_fg_member
+    where CM_FUNCT_BO = #{cmFunctBo,jdbcType=VARCHAR}
+  </select>
+  
   <insert id="insert" parameterType="com.cai.pojo.CmFgMember" >
     insert into cm_fg_member (CM_FUNCT_GROUP_BO, CM_FUNCT_BO)
     values (#{cmFunctGroupBo,jdbcType=VARCHAR}, #{cmFunctBo,jdbcType=VARCHAR})
