@@ -21,23 +21,32 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 	Y.on('io:failure', common.AjaxFailure);//调用Ajax失败方法
 	//-------ajax请求数据---------
 	var formObj = Y.one('#form');
-	var handleSuccess = function(ioId, o){ 
+	var handleSuccess = function(ioId, o){
+		common.clearMessage();
 		if (o.responseText !== undefined) { 
 			var s = o.responseText; 
 			var data = Y.JSON.parse(s);
+			var status = data.status;
 			var result = data.result;
-			for(var j = 0;j < result.length;j++){
-				result[j].id = j + 1;
-			}
 			table.set('data',[]);
-			if(result.length > 0){
-				table.set('data',result);//添加检索的数据
+			if(status=="Y")
+			{
+				for(var j = 0;j < result.length;j++){
+					result[j].id = j + 1;
+				}
+				if(result.length > 0){
+					table.set('data',result);//添加检索的数据
+				}
+			}else
+			{
+				common.setMessage("N","查找的数据为空");
 			}
+			
 		} 
 	} 
 	var handleFailure = function(ioId, o){ 
 	if (o.responseText !== undefined) { 
-			show_info.set("innerHTML", "handleFailure"); 
+			show_info.set("innerHTML", data.message); 
 		}	 
 	} 
 	Y.on('io:success', handleSuccess); 
@@ -63,6 +72,7 @@ YUI().use('node', 'io', 'json-parse', 'json-stringify', 'imes-YuiCommon','node-m
 		Y.one('#FIELD_TYPE').set("value", "");
 		Y.one('#DATA_TAG').set("value", "");
 		Y.one('#MASK_GROUP').set("value", "");
+		common.clearMessage();
 		table.set('data',[]);
 	}
 	Y.on("click", toEmpty, "#toEmpty");//注册按钮点击事件 清空数据
